@@ -1,6 +1,6 @@
 {
   "name": "jquery-document-editor",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "jQuery document maker",
   "main": "index.js",
   "scripts": {
