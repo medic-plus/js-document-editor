@@ -1,0 +1,19 @@
+{
+  "name": "jquery-document-editor",
+  "version": "1.1.0",
+  "description": "jQuery document maker",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IvanVasquez/jEditor.git"
+  },
+  "author": "Ivan Vasquez",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/IvanVasquez/jEditor/issues"
+  },
+  "homepage": "https://github.com/IvanVasquez/jEditor#readme"
+}

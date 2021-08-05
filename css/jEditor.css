@@ -1,0 +1,294 @@
+body {
+    margin: 0;
+}
+button, input{
+    outline: 0;
+}
+button.success, .button.success{
+    background: #4CAF50;
+}
+button.success:hover, .button.success:hover{
+    background: #2E7D32;
+}
+button.error{
+    background: #F44336;
+}
+button.error:hover{
+    background: #B71C1C;
+}
+input.error{
+    border: 2px solid #F44336;
+}
+.selected{
+    color: #2196F3 !important;
+}
+.jEditor{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #565656;
+    color: white;
+    font-family: Helvetica;
+    overflow: hidden;
+}
+.center{
+    width: 100%;
+    text-align: center;
+}
+div.settings{
+    position:fixed;
+    top: 50%;
+    left: 50%;
+    width:20em;
+    margin-top: -10em;
+    margin-left: -7.5em;
+    border: 2px solid #ccc;
+    background-color: #565656;
+    z-index: 2;
+    display: none;
+}
+div.settings .title{
+    width: 100%;
+    height: 20px;
+    font-size: 20px;
+    padding: 5px 0;
+    text-align: center;
+    background-color: rgba(0,0,0,0.5);
+}
+div.settings table{
+    width: 100%;
+}
+div.settings table td{
+    padding: 10px;
+}
+div.settings table input, div.settings table select{
+    width: 100%;
+    font-size: 20px;
+}
+div.settings .close{
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 30px;
+    font-size: 15px;
+    border: 0;
+    color: white;
+    background: #F44336;
+    cursor: pointer;
+}
+.document {
+    float: left;
+    width: 80%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    overflow: auto;
+}
+.document::-webkit-scrollbar {
+    width: 10px;
+}
+.document::-webkit-scrollbar-track {
+    background: rgba(0,0,0,0.2);
+    border-right: 1px solid rgba(0, 0, 0, 0.5);
+}
+.document::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.2);
+}
+.document .position{
+    position: absolute;
+    height: 5%;
+    width: 50%;
+    background: #2196F3;
+    z-index: 1;
+    bottom: 0px;
+    left: 20%;
+    padding: 1rem;
+    display: none;
+}
+.document .position span{
+    color: #0D47A1;
+    text-align: center;
+    font-weight: bold;
+    width: 20%;
+    float: right;
+}
+.document .position table{
+    width: 80%;
+    float: right;
+}
+.document .error{
+    position: absolute;
+    height: 5%;
+    width: 50%;
+    background: #F44336;
+    z-index: 1;
+    top: 0px;
+    left: 20%;
+    padding: 1rem;
+    font-size: 1.2rem;
+    text-align: center;
+    display: none;
+}
+.document .success{
+    position: absolute;
+    height: 5%;
+    width: 50%;
+    background: #4CAF50;
+    z-index: 1;
+    top: 0px;
+    left: 20%;
+    padding: 1rem;
+    font-size: 1.2rem;
+    text-align: center;
+    display: none;
+}
+.document .page {
+    position: relative;
+    background: white;
+    margin-bottom: 1%;
+    box-shadow: 4px 4px rgba(0, 0, 0, 0.5);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+.document .page.a4 {
+    width: 1240px;
+    height: 1754px;
+    left: 620px;
+    top: 3%;
+}
+.document .page.a5 {
+    width: 1240px;
+    height: 874px;
+    left: 620px;
+    top: 3%;
+}
+.document .page .object{
+    color: black;
+    position: absolute;
+    border: 1px dotted #2196F3;
+    cursor: move;
+}
+.document .page .object.rendered{
+    border: none;
+    cursor: pointer;
+}
+.document .page .object .medico h1, .document .page .object .medico h3{
+    margin: 0;
+}
+.document .page .watermark{
+    color: gray;
+    font-size: 1.5rem;
+    position: absolute;
+    bottom: 20px;
+    text-align: center;
+    width: 100%;
+}
+.document .page .protector{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    background: transparent;
+}
+.panel {
+    float: left;
+    width: 20%;
+    height: 100%;
+    overflow: hidden;
+}
+.panel .title {
+    height: 5%;
+    background: rgba(0, 0, 0, 0.6);
+    text-align: center;
+}
+.panel .title h1{
+    margin: 0;
+    font-size: 1.5rem;
+    padding-top: 10px;
+}
+.panel .wide button{
+    width: 100px !important;
+}
+.panel .data{
+    width: 100%;
+}
+.panel .data tr td{
+    padding: 10px;
+}
+.panel .data input{
+    width: 100%;
+    font-size: 20px;
+    margin-top: 5px;
+    border: 0;
+}
+.panel .data input[type="submit"]{
+    color: white;
+    padding: 5px;
+    cursor: pointer;
+}
+.panel .elements {
+    width: 100%;
+    height: 80%;
+    overflow-y: auto;
+}
+.panel .elements .element {
+    height: 40px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+.panel .elements .element .text {
+    padding: 5px;
+    padding-top: 12px;
+    white-space: nowrap;
+    overflow: hidden !important;
+    text-overflow: ellipsis;
+}
+.panel .elements .element button {
+    position: relative;
+    float: right;
+    height: 40px;
+    width: 40px;
+    font-size: 15px;
+    border: 0;
+    color: white;
+    cursor: pointer;
+}
+.panel .elements .element button.add {
+    background: #2196F3;
+}
+.panel .elements .element button.add:hover {
+    background: #1565C0;
+}
+.panel .elements .element button.remove {
+    background: #F44336;
+}
+.panel .elements .element button.remove:hover {
+    background: #B71C1C;
+}
+.panel .elements .element button.settings {
+    background: #4CAF50;
+    display: none;
+}
+.panel .elements .element button.settings:hover {
+    background: #2E7D32;
+}
+.panel .bar {
+    height: 5%;
+    background: rgba(0, 0, 0, 0.6);
+    text-align: center;
+}
+.panel .bar button{
+    border: 0;
+    width: 50px;
+    height: 100%;
+    cursor: pointer;
+    color: white;
+    background: transparent;
+}
+.panel .bar.left button{
+    float: left;
+}
+hr.thick{
+    height: 2px;
+    border: none;
+    color: #333;
+    background-color: #333;
+}
