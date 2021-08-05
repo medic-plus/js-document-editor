@@ -16,7 +16,7 @@
     "url": "https://github.com/IvanVasquez/jEditor/issues"
   },
   "homepage": "https://github.com/IvanVasquez/jEditor#readme",
-  "devDependencies": {
+  "dependencies": {
     "jquery": "^3.5.0"
   }
 }
