@@ -1,6 +1,6 @@
 {
   "name": "jquery-document-editor",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "jQuery document maker",
   "main": "index.js",
   "scripts": {
@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/IvanVasquez/jEditor/issues"
   },
-  "homepage": "https://github.com/IvanVasquez/jEditor#readme"
+  "homepage": "https://github.com/IvanVasquez/jEditor#readme",
+  "devDependencies": {
+    "jquery": "^3.5.0"
+  }
 }
