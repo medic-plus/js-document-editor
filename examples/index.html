@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <meta name="viewport" content="width=device-width">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <link href="../dist/css/jeditor.css" rel="stylesheet">        
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">                
+        <title>jEditor</title>
+    </head>
+    <body>
+        <div class="jEditor"></div>
+        <script src="../dist/js/jeditor.js"></script>
+        <script>
+            var elements = [
+                {text: "Date", value: (new Date()).toLocaleString(), width: 300, height: 20, fontSize: 20, align: true, textAlign: "right"},
+                {text: "Title", value: "<div class='title'><h1>jEditor</h1><h3>A javascript document editor</h3><strong>Lorem ipsum dolor sit amec...</strong></div>", width: 500, height: 100, fontSize: false, align: true, textAlign: "center", noText: true},
+                {text: "Document Name", value: "Test Document 1", width: 500, height: 20, fontSize: 20, align: true, placeholder: ""},
+                {text: "Document Content", value: "<ul><li>Document Content 1</li><li>Document Content 2</li><li>Document Content 3</li></ul>", width: 1120, height: 500, fontSize: 20, align: false, noText: true},
+                {text: "Logo", value: "<img src='https://via.placeholder.com/150' style='width: 100%;height: 100%;'>", width: 125, height: 125, fontSize: false, align: false, noText: true},
+                {text: "Line", value: "<hr class='thick'>", width: 1200, height: 18, fontSize: false, align: false, noText: true},
+                {text: "Signature", value: "<div style='border-top: 2px solid black; padding: 0 10px 0 10px'><small>Signature</small></div>", width: 250, heigth: 30, fontSize: true, noText: 15, align: true, textAlign: "center"},
+            ];
+            const jEditor = $.jEditor({elements, paperSize: "a5"});
+        </script>
+    </body>
+</html>

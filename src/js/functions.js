@@ -141,10 +141,6 @@ export function toggleRender() {
     setOptions({rendered: !getOptions().rendered});
     renderObjects();
 }
-export function defaultValues() {
-    setData(getOptions().defaultData);
-    renderObjects();
-}
 export function toast(text, css, timer = 3000) {
     let wrapper = document.querySelector(".toasts-wrapper");
     let div = document.createElement("div");

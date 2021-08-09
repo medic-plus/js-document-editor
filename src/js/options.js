@@ -1,10 +1,10 @@
 import * as editorFunctions from "./functions";
 export let _EDITOR_OPTIONS = {
     background: null,
+    container: '.jEditor',
     data: [],
-    defaultData: [],
     dpi: 150,
-    elements: {},
+    elements: [],
     elementAction: 'addElement',
     elementFunctions: [                          
         {action: 'modifyElement', content: '<span class="fa fa-edit"></span>', class: 'btn info', show: false},
@@ -38,6 +38,7 @@ export let _EDITOR_OPTIONS = {
     ],
     sizeDecimals: 1,
     sizeUnit: 'cm',
+    title: 'jEditor',
     zoom: 1,  
     zoomIncrement: 0.1,  
 }

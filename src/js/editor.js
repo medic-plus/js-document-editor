@@ -7,10 +7,24 @@ class Editor {
     }
 
     render() {
+        this.createStructure();
         this.renderElements();        
         this.renderSettings();
         this.renderExtraSettings();
         this.renderObjects();
+    }
+
+    createStructure() {
+        const container = document.querySelector(this._ACTUAL_OPTIONS.container);
+        container.innerHTML += `<div class="panel"></div><div class="document"></div><div class="toasts-wrapper"></div>`;
+        const panel = container.querySelector(".panel");
+        panel.innerHTML += `<div class="title">${this._ACTUAL_OPTIONS.title}</div>`;
+        panel.innerHTML += `<div class="elements-wrapper"><ul class="elements"></ul></div>`;
+        panel.innerHTML += `<div class="detail d-none"><div class="header"></div><div class="content"></div><div class="actions"></div></div>`;
+        panel.innerHTML += `<div class="settings"><div class="extra"></div><div class="base"></div></div>`;
+        panel.innerHTML += `<div class="helper"></div>`;
+        const doc = container.querySelector(".document");        
+        doc.innerHTML += `<div class="page-wrapper"><div class="page"></div></div>`;
     }
 
     renderElements() {
