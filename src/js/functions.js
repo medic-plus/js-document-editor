@@ -61,7 +61,8 @@ export function addElement(event) {
     if(elementDOM.classList.contains("active")) return false;
     toggleElementButtons(elementDOM, index);
     let data = getData();
-    data.push({element: index, fontSize: element.fontSize ?? '1rem', width: element.width ?? 100, height: element.height ?? 20, left: 0, top: 0, align: element.align ? element.textAlign : "initial", value: element.value || "", placeholder: element.placeholder || ""});
+    let align = element.align ? (element.textAlign ?? "initial") : "initial";
+    data.push({element: index, fontSize: element.fontSize ?? '1rem', width: element.width ?? 100, height: element.height ?? 20, left: 0, top: 0, align: align, value: element.value || "", placeholder: element.placeholder || ""});
     renderObjects();
     return setData(data);
 }
