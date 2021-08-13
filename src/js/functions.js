@@ -62,7 +62,7 @@ export function addElement(event) {
     toggleElementButtons(elementDOM, index);
     let data = getData();
     let align = element.align ? (element.textAlign ?? "initial") : "initial";
-    data.push({element: index, fontSize: element.fontSize ?? '1rem', width: element.width ?? 100, height: element.height ?? 20, left: 0, top: 0, align: align, value: element.value || "", placeholder: element.placeholder || ""});
+    data.push({element: index, fontSize: element.fontSize || 20, width: element.width ?? 100, height: element.height ?? 20, left: 0, top: 0, align: align, value: element.value || "", placeholder: element.placeholder || ""});
     renderObjects();
     return setData(data);
 }

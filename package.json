@@ -1,11 +1,10 @@
 {
   "name": "js-document-editor",
-  "version": "2.0.4",
+  "version": "2.0.5",
   "description": "javascript document maker",
   "main": "dist/jeditor.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "sass": "node-sass -w src/sass/ -o dist/css/",
+    "test": "echo \"Error: no test specified\" && exit 1",    
     "watch": "webpack --watch --mode=development",
     "build": "webpack --mode=production",
     "build:dev": "webpack --mode=development"
