@@ -67,6 +67,10 @@ class Editor {
         this._ACTUAL_OPTIONS.events.renderObjects();
     }
 
+    unsaved(){
+        this._ACTUAL_OPTIONS.events.unsaved();
+    }
+
     setPaper(paperSize = this._ACTUAL_OPTIONS.paperSize){                
         this._ACTUAL_OPTIONS.events.setPaper(undefined, paperSize);
     }
@@ -118,6 +122,7 @@ class Editor {
                 break;
         }
         this.setData(editorData);
+        this.unsaved();
         this.renderObjects();
     }
 

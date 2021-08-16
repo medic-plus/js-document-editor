@@ -1,6 +1,6 @@
 {
   "name": "js-document-editor",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "javascript document maker and editor",
   "main": "dist/jeditor.js",
   "scripts": {

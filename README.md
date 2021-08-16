@@ -149,6 +149,10 @@ After executing `var jEditor = $.jEditor()` you can use that variable or the glo
 - _setData(options)_: sets objects data (need to run renderObjects() to show it on editor).
 - _renderObjects()_: Executes the event renderObjects (creates elements based on data).
 - _setPaper(paperSize)_: Executes the event setPaper (sets page size).
+- _setBackround(url)_: sets the background-image property of the page and as the background option (event setPageBackground()).
+- _clearBackround()_: clears the page background and sets the option as null.
+- _unsaved()_: sets a `beforeunload` as en event listener. (event unsaved()).
+- _getObject(element)_: returns the object inside the editor data with the index of the element sent as parameter.
 
 ### Events
 
@@ -169,8 +173,7 @@ All functions takes the first parameter as a click event where it gets the targe
 - _toast(text, css, timer)_: shows a toast with the css as class (example "bg-success") for the timer amount (ms).
 - _unsaved()_: sets a `beforeunload` as en event listener.
 - _saveData()_: removes `beforeunload` event listener and shows a toast.
-- _setBackround(url)_: sets the background-image property of the page and as the background option.
-- _clearBackround()_: clears the page background and sets the option as null.
+- _setPageBackround(url)_: sets the background-image property of the page and as the background option.
 
 # Elements
 
