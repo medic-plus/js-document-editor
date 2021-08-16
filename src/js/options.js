@@ -16,11 +16,16 @@ export let _EDITOR_OPTIONS = {
     locale: {
         width: 'Width',
         height: 'Height',
-        top: 'Top margin',
-        left: 'Left margin',
+        topMargin: 'Top margin',
+        leftMargin: 'Left margin',
         return: 'Return',
         paperChange: 'The paper has been set to :size',
-        saved: 'Changes saved'
+        saved: 'Changes saved',
+        hPosition: 'Horizontal position',
+        vPosition: 'Vertical position',
+        textAlign: 'Text align',
+        fontSize: 'Font size',
+        placeholder: 'Placeholder'
     },
     paperSize: 'a4',
     paperSizes: {
@@ -45,7 +50,7 @@ export let _EDITOR_OPTIONS = {
 }
 export let _ELEMENT_OPTIONS = {
     align: "initial", 
-    fontSize: 20,     
+    fontSize: 16,     
     height: 20, 
     left: 0,   
     placeholder: "",
@@ -61,7 +66,7 @@ export let _ELEMENT_OPTIONS = {
 
 export let _DATA_OPTIONS = {
     element: null,
-    fontSize: 20,
+    fontSize: 16,
     width: 100, 
     height: 20, 
     top: 0,

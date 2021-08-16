@@ -190,6 +190,26 @@ li.element .actions {
   flex-grow: 1;
   flex-basis: auto;
   overflow: auto;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+.panel .detail .content h4 {
+  margin: 1rem 0 0.5rem 0;
+}
+.panel .detail .content input {
+  font-size: 1.25rem;
+  padding: 0.25rem 0.5rem;
+}
+.panel .detail .content .btn-group {
+  display: flex;
+  justify-content: space-around;
+}
+.panel .detail .content .btn-group > * {
+  flex-grow: 1;
+  font-size: 1.25rem;
+  margin: 0 0.5rem;
+  padding: 0.5rem;
 }
 .panel .detail .actions {
   display: flex;
@@ -252,7 +272,7 @@ li.element .actions {
     background: map-get($bg-colors, $primary) !important;
   }
   .btn.#{$primary}:hover {
-    background: darken(map-get($bg-colors, $primary), 10%);
+    background: darken(map-get($bg-colors, $primary), 10%) !important;
   }
   .fg-#{$primary} {
     color: map-get($bg-colors, $primary);

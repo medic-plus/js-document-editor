@@ -81,6 +81,51 @@ class Editor {
         this._ACTUAL_OPTIONS.events.setPageBackground();
     }
 
+    modifyElement(element = null, type = '', data = undefined){
+        if(element === null || type === '')
+            return console.log("textAlign","Element not defined");
+        let editorData = this.getData();       
+        const index =  editorData.map(d => d.element).indexOf(element);
+        const object = this.getObject(element);
+        const page = document.querySelector(".page");
+        switch(type){
+            case "ta": //textAlign
+                editorData[index].align = data;
+                break;
+            case "fs": //fontSize
+                editorData[index].fontSize = parseInt(data.value);
+                break;
+            case "ph": //placeholder
+                editorData[index].placeholder = data.value;
+                break;
+            case "pos": //position
+                let position = data.indexOf("v-") !== -1 ? 'top' : 'left';                
+                if(object === null)
+                    break;
+                if(data === "v-top" || data === "h-left"){
+                    editorData[index][position] = 0;
+                    break;
+                }
+                let amount = position === "top" ? (page.offsetHeight - object.height) : (page.offsetWidth  - object.width);
+                if(data === "v-center" || data === "h-center"){
+                    editorData[index][position] = amount / 2;
+                    break;
+                }
+                if(data === "v-bottom" || data === "h-right"){
+                    editorData[index][position] = amount - 1;
+                    break;
+                }
+                break;
+        }
+        this.setData(editorData);
+        this.renderObjects();
+    }
+
+    getObject(element){
+        var index = this.getData().map(d => d.element).indexOf(element);
+        return index === -1 ? null : this.getData()[index];
+    }
+
     triggers(){
         const EDITOR_OPTIONS = this._ACTUAL_OPTIONS;
         document.querySelectorAll("[data-action]").forEach((element) =>  {
@@ -93,7 +138,7 @@ class Editor {
     getOptions = () => this._ACTUAL_OPTIONS;
     setOptions = (options) => this._ACTUAL_OPTIONS = merge(this._ACTUAL_OPTIONS, options);
     getData = () => this._ACTUAL_OPTIONS.data.map(element => merge(_DATA_OPTIONS, element));
-    setData = (data) => this._ACTUAL_OPTIONS.data = data.map(element => merge(_DATA_OPTIONS, element));               
+    setData = (data) => this._ACTUAL_OPTIONS.data = data.map(element => merge(_DATA_OPTIONS, element));          
 }
 
 export default Editor;

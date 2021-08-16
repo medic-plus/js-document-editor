@@ -1,7 +1,7 @@
 {
   "name": "js-document-editor",
-  "version": "2.0.6",
-  "description": "javascript document maker",
+  "version": "2.1.0",
+  "description": "javascript document maker and editor",
   "main": "dist/jeditor.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

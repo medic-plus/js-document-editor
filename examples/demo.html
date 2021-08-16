@@ -44,8 +44,12 @@
             ];
             var extraFunctions = [
                 {action: 'defaultValues', content: '<span class="fa fa-magic"></span> Default View', class: 'btn', show: true},                
+                {action: 'clearBackground', content: '<span class="fa fa-magic"></span> Clear Background', class: 'btn', show: true},                
                 {action: 'saveData', content: '<span class="fa fa-save"></span> Save', class: 'btn', show: true},
             ];
+            function clearBackground() {
+                _jeditor.clearBackground();
+            }
             function saveData() {
                 _jeditor.getOptions().events.saveData();
                 var data = _jeditor.getData();

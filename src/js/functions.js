@@ -23,13 +23,15 @@ function renderObject(object){
     const page = document.querySelector(".page");
     const element = merge(_ELEMENT_OPTIONS, getOptions()?.elements[object.element]);    
     const settings = element.settings;     
-    page.innerHTML += `<div class="object" data-element="${object.element}">${settings.placeholder ? element.placeholder : ''} ${element.value ?? ""}</div>`;    
+    let textValue = `${(settings.placeholder ? (object.placeholder || element.placeholder) : '')} ${object.value || element.value}`;
+    page.innerHTML += `<div class="object" data-element="${object.element}">${textValue}</div>`;    
     const DOMobject = document.querySelector(`[data-element="${object.element}"].object`);    
     DOMobject.style.width = object.width + "px";
     DOMobject.style.height = object.height + "px";
     DOMobject.style.top = object.top + "px";
     DOMobject.style.left = object.left + "px";      
     DOMobject.style.textAlign = object.align ?? 'initial';    
+    DOMobject.style.fontSize = (object.fontSize ?? 20) + "px";    
     const liElement = document.querySelector(`li[data-element="${object.element}"]`);
     if(getOptions().rendered){
         DOMobject.classList.add("rendered");
@@ -100,13 +102,42 @@ export function modifyElement(event) {
     let divContent = document.querySelector(".detail .content");
     let divActions = document.querySelector(".detail .actions");
     const options = getOptions();
-    const element = options.elements[index];
+    const element = merge(_ELEMENT_OPTIONS, options?.elements[index]);    
     document.querySelector(".detail").classList.remove("d-none");
     document.querySelector(".elements-wrapper").classList.add("d-none");
     document.querySelector(".detail .header").innerHTML = element.text;
-    divContent.innerHTML = ``;
-    divActions.innerHTML = `<button class="btn warning">${options.locale.return}</button>`;
-    document.querySelector('.detail .actions button.warning').addEventListener("click", options.events.cancelModifyElement);
+    let htmlContent = '';   
+    if(element.settings.fontSize)
+        htmlContent += `<h4>${options?.locale?.fontSize}</h4>
+        <input type='number' value='${element.fontSize}' onchange='_jeditor.modifyElement(${index}, "fs", this)'>`;
+    if(element.settings.placeholder)
+        htmlContent += `<h4>${options?.locale?.placeholder}</h4>
+        <input type='text' value='${element.placeholder}' onchange='_jeditor.modifyElement(${index}, "ph", this)'>`; 
+    if(element.settings.align)        
+        htmlContent += `<h4>${options?.locale?.textAlign}</h4>
+        <div class="btn-group">
+            <button class="btn primary" onclick='_jeditor.modifyElement(${index}, "ta", "left")'><span class="fa fa-align-left"></span></button>
+            <button class="btn primary" onclick='_jeditor.modifyElement(${index}, "ta", "center")'><span class="fa fa-align-center"></span></button>
+            <button class="btn primary" onclick='_jeditor.modifyElement(${index}, "ta", "right")'><span class="fa fa-align-right"></span></button>                
+            <button class="btn primary" onclick='_jeditor.modifyElement(${index}, "ta", "justify")'><span class="fa fa-align-justify"></span></button> 
+        </div>`;    
+    htmlContent += `
+            <h4>${options?.locale?.hPosition}</h4>
+            <div class="btn-group">
+                <button class="btn primary" onclick='_jeditor.modifyElement(${index}, "pos", "h-left")'><span class="fa fa-angle-double-left"></span></button>
+                <button class="btn primary" onclick='_jeditor.modifyElement(${index}, "pos", "h-center")'><span class="fa fa-align-center"></span></button>
+                <button class="btn primary" onclick='_jeditor.modifyElement(${index}, "pos", "h-right")'><span class="fa fa-angle-double-right"></span></button>                
+            </div>
+            <h4>${options?.locale?.vPosition}</h4>
+            <div class="btn-group">
+                <button class="btn primary" onclick='_jeditor.modifyElement(${index}, "pos", "v-top")'><span class="fa fa-sort-amount-up"></span></button>
+                <button class="btn primary" onclick='_jeditor.modifyElement(${index}, "pos", "v-center")'><span class="fa fa-align-center"></span></button>
+                <button class="btn primary" onclick='_jeditor.modifyElement(${index}, "pos", "v-bottom")'><span class="fa fa-sort-amount-down"></span></button>
+            </div>
+            `;
+    divContent.innerHTML = htmlContent;
+    divActions.innerHTML = `<button class="btn warning">${options?.locale?.return}</button>`;
+    document.querySelector('.detail .actions button.warning').addEventListener("click", options?.events?.cancelModifyElement);
 }
 export function cancelModifyElement(event) {
     let content = document.querySelector(".detail .content");

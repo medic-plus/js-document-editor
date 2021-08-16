@@ -69,11 +69,16 @@ You can customize your locale to your needs, the defaults are:
 locale: {
   width: 'Width',
   height: 'Height',
-  top: 'Top margin',
-  left: 'Left margin',
+  topMargin: 'Top margin',
+  leftMargin: 'Left margin',
   return: 'Return',
-  paperChange: 'The paper has ben set to :size',
-  saved: 'Changes saved'
+  paperChange: 'The paper has been set to :size',
+  saved: 'Changes saved',
+  hPosition: 'Horizontal position',
+  vPosition: 'Vertical position',
+  textAlign: 'Text align',
+  fontSize: 'Font size',
+  placeholder: 'Placeholder'
 },
 ```
 
@@ -174,7 +179,7 @@ Elements are shown in the side panel and when clicked are added to the page as a
 | option               |      default      | description                                          |
 | -------------------- | :---------------: | ---------------------------------------------------- |
 | align                | String: "initial" | CSS value for text-align                             |
-| fontSize             |    Integer: 20    | font size in pixels                                  |
+| fontSize             |    Integer: 16    | font size in pixels                                  |
 | height               |    Integer: 20    | height of the displayed object in pixels             |
 | left                 |    Integer: 0     | left position in pixels from start of page           |
 | placeholder          |    String: ""     | text shown inside the element before the value       |
@@ -193,7 +198,7 @@ Data can be return with `_jeditor.getData()` or set with `_jeditor.setData(...)`
 | option      |      default      | description                                    |
 | ----------- | :---------------: | ---------------------------------------------- |
 | element     |   Integer: null   | index of item in element array                 |
-| fontSize    |    Integer: 20    | font size in pixels                            |
+| fontSize    |    Integer: 16    | font size in pixels                            |
 | width       |   Integer: 100    | width of the displayed object in pixels        |
 | height      |    Integer: 20    | height of the displayed object in pixels       |
 | top         |    Integer: 0     | top position in pixels from start of page      |

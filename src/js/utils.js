@@ -106,8 +106,8 @@ function setHelper(element) {
     helper.innerHTML = `<div class="header">${options.elements[index].text}</div>`;
     content += `<div><strong>${locale.height}</strong>${height}</div>`;
     content += `<div><strong>${locale.width}</strong>${width}</div>`;
-    content += `<div><strong>${locale.top}</strong>${top}</div>`;
-    content += `<div><strong>${locale.left}</strong>${left}</div>`;
+    content += `<div><strong>${locale.topMargin}</strong>${top}</div>`;
+    content += `<div><strong>${locale.leftMargin}</strong>${left}</div>`;
     helper.innerHTML += `${content}</div>`;
 }
 function pixelsToUnit(unit, decimals, dpi, value) {
