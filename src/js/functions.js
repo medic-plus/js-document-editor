@@ -1,4 +1,7 @@
+import { _DATA_OPTIONS, _ELEMENT_OPTIONS } from "./options";
 import { initDragElement, initResizeElement } from "./utils";
+
+const merge = require('deepmerge');
 
 var getOptions = () => _jeditor.getOptions();
 var setOptions = (options) => _jeditor.setOptions(options);
@@ -18,8 +21,9 @@ function toggleElementButtons(element, index){
 }
 function renderObject(object){
     const page = document.querySelector(".page");
-    const element = getOptions()?.elements[object.element];    
-    page.innerHTML += `<div class="object" data-element="${object.element}">${element.placeholder ?? ''} ${element.value}</div>`;    
+    const element = merge(_ELEMENT_OPTIONS, getOptions()?.elements[object.element]);    
+    const settings = element.settings;     
+    page.innerHTML += `<div class="object" data-element="${object.element}">${settings.placeholder ? element.placeholder : ''} ${element.value ?? ""}</div>`;    
     const DOMobject = document.querySelector(`[data-element="${object.element}"].object`);    
     DOMobject.style.width = object.width + "px";
     DOMobject.style.height = object.height + "px";
@@ -53,18 +57,32 @@ function findWithAttr(array, attr, value) {
     }
     return -1;
 }
+export function getElementData(index, element) {
+    const settings = element.settings; 
+    return {
+        element: index,
+        fontSize: settings.fontSize ? element.fontSize : 20,
+        width: element.width ?? 100, 
+        height: element.height ?? 20, 
+        top: element.top ?? 0,
+        left: element.left ?? 0,
+        align: settings.align ? element.align : "initial",
+        placeholder: settings.placeholder ? element.placeholder : "",        
+        value: element.value ?? "", 
+    }
+}
 export function addElement(event) {
     event.stopPropagation();
     const elementDOM = event.target.closest("li");        
-    const index = parseInt(elementDOM.getAttribute("data-element"));    
-    const element = getOptions().elements[index];    
+    const index = parseInt(elementDOM.getAttribute("data-element"));        
+    const element = merge(_ELEMENT_OPTIONS, getOptions()?.elements[index]);    
     if(elementDOM.classList.contains("active")) return false;
     toggleElementButtons(elementDOM, index);
-    let data = getData();
-    let align = element.align ? (element.textAlign ?? "initial") : "initial";
-    data.push({element: index, fontSize: element.fontSize || 20, width: element.width ?? 100, height: element.height ?? 20, left: 0, top: 0, align: align, value: element.value || "", placeholder: element.placeholder || ""});
+    let newData = getData();       
+    newData.push(getElementData(index, element));
+    let data = setData(newData);   
     renderObjects();
-    return setData(data);
+    return data;
 }
 export function removeElement(event) {    
     event.stopPropagation();
@@ -128,10 +146,10 @@ export function setPaper(event, paperSize = "a4") {
     }
     return false;
 }
-export function renderObjects() {
+export function renderObjects() {    
     document.querySelector(".page").innerHTML = '';    
-    getData().forEach((data) => {
-        renderObject(data);
+    getData().forEach((data) => {        
+        renderObject(merge(_DATA_OPTIONS, data));
     });
     const helper = getOptions().helper;
     const selector = document.querySelectorAll(".object:not(.rendered)");
@@ -153,8 +171,10 @@ export function toast(text, css, timer = 3000) {
     }, timer);
 }
 export function unsaved() {
-    window.addEventListener("beforeunload", exitConfirmation);
-    document.querySelector(".btn[data-action=saveData]").className = "btn primary";
+    window.addEventListener("beforeunload", exitConfirmation);    
+    if(getOptions().saveButton){
+        document.querySelector(".btn[data-action=saveData]").className = "btn primary";
+    }
 }
 export function exitConfirmation(e) {            
     (e || window.event).returnValue = "Changes you made may not be saved."; //Gecko + IE
@@ -162,9 +182,11 @@ export function exitConfirmation(e) {
 }
 export function saveData() {
     window.removeEventListener("beforeunload", exitConfirmation);
-    document.querySelector(".btn[data-action=saveData]").className = "btn";
     toast(getOptions().locale.saved, "bg-success");
+    if(getOptions().saveButton){
+        document.querySelector(".btn[data-action=saveData]").className = "btn";
+    }
 }
-export function setBackground() {
-
+export function setPageBackground(url = null) {        
+    document.querySelector(".page").style.backgroundImage = (url !== "" && url !== null) ? `url(${url})` : '';
 }

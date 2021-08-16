@@ -24,25 +24,23 @@
         <div class="jEditor"></div>        
         <script src="../dist/js/jeditor.js"></script>
         <script>
-
             var elements = [
-                {text: "Date", value: (new Date()).toLocaleString(), width: 300, height: 20, fontSize: 20, align: true, textAlign: "right"},
-                {text: "Title", value: "<div class='title'><h1>jEditor</h1><h3>A javascript document editor</h3><strong>Lorem ipsum dolor sit amec...</strong></div>", width: 500, height: 100, fontSize: false, align: true, textAlign: "center", noText: true},
+                {text: "Date", value: (new Date()).toLocaleString(), width: 300, height: 20, align: "right"},
+                {text: "Title", value: "<div class='title'><h1>jEditor</h1><h3>A javascript document editor</h3><strong>Lorem ipsum dolor sit amec...</strong></div>", width: 500, height: 100, align: "center", settings: {fontSize: false, placeholder: false}},
                 {text: "Document Name", value: "Test Document 1", width: 500, height: 20, fontSize: 20, align: true, placeholder: ""},
-                {text: "Document Content", value: "<ul><li>Document Content 1</li><li>Document Content 2</li><li>Document Content 3</li></ul>", width: 1120, height: 500, fontSize: 20, align: false, noText: true},
-                {text: "Logo", value: "<img src='https://via.placeholder.com/150' style='width: 100%;height: 100%;'>", width: 125, height: 125, fontSize: false, align: false, noText: true},
-                {text: "Line", value: "<hr class='thick'>", width: 1200, height: 18, fontSize: false, align: false, noText: true},
-                {text: "Signature", value: "<div style='border-top: 2px solid black; padding: 0 10px 0 10px'><small>Signature</small></div>", width: 250, heigth: 30, fontSize: true, noText: 15, align: true, textAlign: "center"},
-            ];
-            
+                {text: "Document Content", value: "<ul><li>Document content 1</li><li>Document content 2</li><li>Document content 3</li></ul>", width: 1120, height: 500, settings: {align: false, placeholder: false}},
+                {text: "Logo", value: "<img src='https://via.placeholder.com/150' style='width: 100%;height: 100%;'>", width: 125, height: 125, settings: {align: false, fontSize: false, placeholder: false}},
+                {text: "Line", value: "<hr class='thick'>", width: 1200, height: 18, settings: {align: false, fontSize: false, placeholder: false}},
+                {text: "Signature", value: "<div style='border-top: 2px solid black; padding: 0 10px 0 10px'><small>Signature</small></div>", width: 250, heigth: 30, align: "center", settings: {placeholder: false}},
+            ];            
             var defaultData = [
-                {"element":0,"fontSize":20,"width":303,"height":21,"left":877,"top":226,"align":"right","value":""},
-                {"element":1,"fontSize":false,"width":502,"height":102,"left":355,"top":43,"align":"center","value":""},
-                {"element":2,"fontSize":20,"width":502,"height":21,"left":59,"top":227,"value":""},
-                {"element":3,"fontSize":20,"width":1124,"height":504,"left":56,"top":274,"align":"initial","value":""},
-                {"element":4,"fontSize":false,"width":127,"height":127,"left":60,"top":43,"align":"initial","value":""},
-                {"element":6,"fontSize":true,"width":251,"height":22,"left":464,"top":815,"align":"center","value":""},
-                {"element":5,"fontSize":false,"width":1202,"height":20,"left":16,"top":197,"align":"initial","value":""}
+                {element: 0, fontSize: 20, width: 300, height: 20, left: 877, top: 226, align: "right"},
+                {element: 1, width: 500, height: 100, left: 355, top: 43, align: "center"},
+                {element: 2, fontSize: 20, width: 500, height: 20, left: 59, top: 227},  
+                {element: 3, fontSize: 20, width: 1125, height: 500, left: 55, top: 275},
+                {element: 4, width: 125, height: 125, left: 50, top: 50},
+                {element: 5, width: 1200, height: 20, left: 15, top: 200},
+                {element: 6, width: 250, height: 22, left: 465, top: 815, align: "center"},
             ];
             var extraFunctions = [
                 {action: 'defaultValues', content: '<span class="fa fa-magic"></span> Default View', class: 'btn', show: true},                
@@ -58,7 +56,7 @@
                 _jeditor.setData(defaultData);
                 _jeditor.renderObjects();
             }
-            const jEditor = $.jEditor({elements, data: defaultData, defaultData, paperSize: "a5", extraFunctions});
+            const jEditor = $.jEditor({elements, data: defaultData, defaultData, paperSize: "a5", extraFunctions, saveButton: true, background: 'https://i.pinimg.com/originals/3e/8e/bb/3e8ebbc3e95fc28bbf666c52347a2ad4.jpg'});
         </script>
     </body>
 </html>

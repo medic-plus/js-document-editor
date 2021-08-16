@@ -40,6 +40,8 @@ input {
   position: relative;
   background: map-get($bg-colors, "page");
   box-shadow: 4px 4px rgba(0, 0, 0, 0.2);
+  background-repeat: no-repeat;
+  background-size: cover;
   margin: auto;
 }
 .page .object {

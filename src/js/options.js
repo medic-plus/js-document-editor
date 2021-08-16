@@ -1,5 +1,5 @@
 import * as editorFunctions from "./functions";
-export let _EDITOR_OPTIONS = {
+export let _EDITOR_OPTIONS = {    
     background: null,
     container: '.jEditor',
     data: [],
@@ -19,7 +19,7 @@ export let _EDITOR_OPTIONS = {
         top: 'Top margin',
         left: 'Left margin',
         return: 'Return',
-        paperChange: 'The paper has ben set to :size',
+        paperChange: 'The paper has been set to :size',
         saved: 'Changes saved'
     },
     paperSize: 'a4',
@@ -28,7 +28,8 @@ export let _EDITOR_OPTIONS = {
         a4: {name: 'A4', width: 1240, height: 1754}, 
         a5: {name: 'A5', width: 1240, height: 874}
     },
-    rendered: false,    
+    rendered: false,   
+    saveButton: false, 
     settings: [
         {action: 'toggleRender', content: '<span class="fa fa-edit"></span>', class: 'btn', show: true},
         {action: 'changePaper', content: '<span class="fa fa-file"></span>', class: 'btn', show: true},
@@ -41,4 +42,31 @@ export let _EDITOR_OPTIONS = {
     title: 'jEditor',
     zoom: 1,  
     zoomIncrement: 0.1,  
+}
+export let _ELEMENT_OPTIONS = {
+    align: "initial", 
+    fontSize: 20,     
+    height: 20, 
+    left: 0,   
+    placeholder: "",
+    settings: {
+        align: true,
+        fontSize: true,
+        placeholder: true,
+    },
+    top: 0, 
+    value: "", 
+    width: 100,    
+}
+
+export let _DATA_OPTIONS = {
+    element: null,
+    fontSize: 20,
+    width: 100, 
+    height: 20, 
+    top: 0,
+    left: 0,
+    align: "initial",
+    placeholder: "",        
+    value: "", 
 }

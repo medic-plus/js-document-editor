@@ -1,17 +1,24 @@
-import { _EDITOR_OPTIONS } from "./options";
+import { _DATA_OPTIONS, _EDITOR_OPTIONS } from "./options";
+
+const merge = require('deepmerge');
+let _rendered = false;
 
 class Editor {
 
     constructor(options) {
-        this._ACTUAL_OPTIONS = {..._EDITOR_OPTIONS, ...options};           
+        this._ACTUAL_OPTIONS = merge(_EDITOR_OPTIONS, options);
     }
 
-    render() {
-        this.createStructure();
+    render() {    
+        if(_rendered)
+            return console.error("jEditor already rendered, try using _jeditor.renderObjects() to redraw");
+        this.createStructure();        
         this.renderElements();        
         this.renderSettings();
         this.renderExtraSettings();
         this.renderObjects();
+        this.setBackground();
+        _rendered = true;
     }
 
     createStructure() {
@@ -64,6 +71,16 @@ class Editor {
         this._ACTUAL_OPTIONS.events.setPaper(undefined, paperSize);
     }
 
+    setBackground(url = this._ACTUAL_OPTIONS.background){
+        this._ACTUAL_OPTIONS.background = url;
+        this._ACTUAL_OPTIONS.events.setPageBackground(url);
+    }
+
+    clearBackground(){
+        this._ACTUAL_OPTIONS.background = null;
+        this._ACTUAL_OPTIONS.events.setPageBackground();
+    }
+
     triggers(){
         const EDITOR_OPTIONS = this._ACTUAL_OPTIONS;
         document.querySelectorAll("[data-action]").forEach((element) =>  {
@@ -74,9 +91,9 @@ class Editor {
     }
 
     getOptions = () => this._ACTUAL_OPTIONS;
-    setOptions = (options) =>  this._ACTUAL_OPTIONS = {...this._ACTUAL_OPTIONS, ...options};
-    getData = () => this._ACTUAL_OPTIONS.data;
-    setData = (data) => this._ACTUAL_OPTIONS.data = data;
+    setOptions = (options) => this._ACTUAL_OPTIONS = merge(this._ACTUAL_OPTIONS, options);
+    getData = () => this._ACTUAL_OPTIONS.data.map(element => merge(_DATA_OPTIONS, element));
+    setData = (data) => this._ACTUAL_OPTIONS.data = data.map(element => merge(_DATA_OPTIONS, element));               
 }
 
 export default Editor;
