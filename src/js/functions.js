@@ -1,5 +1,5 @@
 import { _DATA_OPTIONS, _ELEMENT_OPTIONS } from "./options";
-import { initDragElement, initResizeElement } from "./utils";
+import { initDragElement, initDraggableElement, initResizableElement } from "./utils";
 
 const merge = require('deepmerge');
 
@@ -47,7 +47,7 @@ function objectTriggers(object){
     data[arrayIndex].width = object.offsetWidth;
     data[arrayIndex].height = object.offsetHeight;
     data[arrayIndex].top = object.offsetTop;
-    data[arrayIndex].left = object.offsetLeft;      
+    data[arrayIndex].left = object.offsetLeft;         
     setData(data);
     unsaved();
 }
@@ -143,6 +143,7 @@ export function cancelModifyElement(event) {
     let content = document.querySelector(".detail .content");
     document.querySelector(".detail").classList.add("d-none");
     document.querySelector(".elements-wrapper").classList.remove("d-none");
+    document.querySelector(".object.active").classList.remove("active");
     content.innerHTML = ``;
 }
 export function zoomIn() {
@@ -183,9 +184,18 @@ export function renderObjects() {
         renderObject(merge(_DATA_OPTIONS, data));
     });
     const helper = getOptions().helper;
-    const selector = document.querySelectorAll(".object:not(.rendered)");
-    initDragElement(selector, objectTriggers, helper);
-    initResizeElement(selector, objectTriggers, helper);
+    const selector = ".object:not(.rendered)";
+    initDraggableElement(selector, objectTriggers, helper);    
+    initResizableElement(selector, objectTriggers, helper);
+    document.querySelectorAll(selector).forEach(function(object){
+        object.addEventListener("click", function(event){
+            document.querySelectorAll(".object.active").forEach(function(active) {
+                if(active !== object) active.classList.remove("active");             
+            });
+            object.classList.add("active");    
+            modifyElement({target: object});
+        })
+    });    
 }
 export function toggleRender() {
     setOptions({rendered: !getOptions().rendered});

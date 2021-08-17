@@ -1,6 +1,6 @@
 {
   "name": "js-document-editor",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "javascript document maker and editor",
   "main": "dist/jeditor.js",
   "scripts": {
@@ -21,7 +21,8 @@
   "homepage": "https://github.com/IvanVasquez/jEditor#readme",
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.15.4",
-    "deepmerge": "^4.2.2"
+    "deepmerge": "^4.2.2",
+    "interactjs": "^1.10.11"
   },
   "devDependencies": {
     "@babel/core": "^7.15.0",

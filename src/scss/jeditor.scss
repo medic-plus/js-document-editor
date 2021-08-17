@@ -1,4 +1,5 @@
 @import "variables";
+
 body {
   margin: 0;
   font-family: Helvetica;
@@ -59,28 +60,6 @@ input {
 .page .object.rendered {
   border: 1px solid transparent;
   cursor: default;
-}
-.object .resizer {
-  position: absolute;
-  width: 10px;
-  height: 10px;
-  bottom: -5px;
-  right: -5px;
-}
-.object .resizer-right {
-  cursor: e-resize;
-  height: 100%;
-  bottom: 0px;
-}
-.object .resizer-bottom {
-  cursor: n-resize;
-  width: 100%;
-  right: 0;
-}
-.object .resizer-both {
-  position: absolute;
-  cursor: nw-resize;
-  z-index: 10;
 }
 .panel {
   flex: 20;
@@ -277,4 +256,80 @@ li.element .actions {
   .fg-#{$primary} {
     color: map-get($bg-colors, $primary);
   }
+}
+
+.resizable {
+  margin: 0;
+}
+
+.resizable:hover {
+  cursor: move;
+}
+
+.object.active > .handles {
+  display: block;
+}
+.handles {
+  background-color: white;
+  width: 7px;
+  height: 7px;
+  border: 1px solid dodgerblue;
+  position: absolute;
+  display: none;
+}
+.n-cursor {
+  top: -9px;
+  left: calc(50% - 3.5px);
+}
+.ne-cursor {
+  top: -9px;
+  right: -9px;
+}
+.nw-cursor {
+  top: -9px;
+  left: -9px;
+}
+.w-cursor {
+  top: calc(50% - 3.5px);
+  left: -9px;
+}
+.e-cursor {
+  top: calc(50% - 3.5px);
+  right: -9px;
+}
+.s-cursor {
+  bottom: -9px;
+  left: calc(50% - 3.5px);
+}
+.se-cursor {
+  bottom: -9px;
+  right: -9px;
+}
+.sw-cursor {
+  bottom: -9px;
+  left: -9px;
+}
+.n-cursor:hover {
+  cursor: n-resize;
+}
+.ne-cursor:hover {
+  cursor: ne-resize;
+}
+.nw-cursor:hover {
+  cursor: nw-resize;
+}
+.w-cursor:hover {
+  cursor: w-resize;
+}
+.e-cursor:hover {
+  cursor: e-resize;
+}
+.s-cursor:hover {
+  cursor: s-resize;
+}
+.se-cursor:hover {
+  cursor: se-resize;
+}
+.sw-cursor:hover {
+  cursor: sw-resize;
 }

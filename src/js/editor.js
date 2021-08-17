@@ -32,6 +32,12 @@ class Editor {
         panel.innerHTML += `<div class="helper"></div>`;
         const doc = container.querySelector(".document");        
         doc.innerHTML += `<div class="page-wrapper"><div class="page"></div></div>`;
+        const page = document.querySelector(".page");
+        const _this = this;
+        page.addEventListener("click", function(event) {
+            if(event.target === page)
+            _this._ACTUAL_OPTIONS.events.cancelModifyElement()
+        });
     }
 
     renderElements() {
