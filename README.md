@@ -14,6 +14,14 @@ This package is hosted as a npm package and can be installed directly from offic
 npm i js-document-editor
 ```
 
+### Contributing
+
+To make changes to this project is recommended to run this package inside a docker container using: 
+
+```
+docker run -it --rm -v $(pwd):/app node bash
+```
+
 ## Usage
 
 You need to import the css and js files (and fontawesome css in case you want it), then create a div with class jEditor
