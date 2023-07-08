@@ -11,15 +11,15 @@ You can download it directly or cloning the repository and copying the dist fold
 This package is hosted as a npm package and can be installed directly from official repository using:
 
 ```
-npm i js-document-editor
+npm i @medicplus/js-document-editor
 ```
 
 ### Contributing
 
-To make changes to this project is recommended to run this package inside a docker container using: 
+To make changes to this project is recommended to run this package inside a docker container using latest lts node version:
 
 ```
-docker run -it --rm -v $(pwd):/app node bash
+docker run -it --rm -v $(pwd):/app node:lts bash
 ```
 
 ## Usage
