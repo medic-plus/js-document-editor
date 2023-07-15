@@ -116,9 +116,10 @@ class Editor {
         editorData[index].align = data;
         break;
       case "fs": //fontSize
+        const intValue = parseInt(data.value);
         const height = editorData[index].height;
-        editorData[index].fontSize = parseInt(data.value);
-        editorData[index].height = data.value > height ? data : height;
+        editorData[index].fontSize = intValue;
+        editorData[index].height = intValue > height ? intValue : height;
         break;
       case "ph": //placeholder
         editorData[index].placeholder = data.value;
@@ -142,6 +143,8 @@ class Editor {
           editorData[index][position] = amount - 1;
           break;
         }
+        break;
+      default:
         break;
     }
     this.setData(editorData);

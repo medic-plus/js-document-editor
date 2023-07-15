@@ -1,6 +1,6 @@
 {
-  "name": "js-document-editor",
-  "version": "2.2.2",
+  "name": "@medicplus/js-document-editor",
+  "version": "2.2.3",
   "description": "javascript document maker and editor",
   "main": "dist/jeditor.js",
   "scripts": {
