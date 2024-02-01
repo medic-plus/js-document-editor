@@ -16,10 +16,10 @@ npm i @medicplus/js-document-editor
 
 ### Contributing
 
-To make changes to this project is recommended to run this package inside a docker container using latest lts node version:
+To make changes to this project is recommended to run this package inside a docker container using node version 18:
 
 ```
-docker run -it --rm -v $(pwd):/app node:lts bash
+docker run -it --rm -v $(pwd):/app node:18 bash
 ```
 
 ## Usage
@@ -217,6 +217,9 @@ Data can be return with `_jeditor.getData()` or set with `_jeditor.setData(...)`
 | align       | String: "initial" | CSS value for text-align                       |
 | placeholder |    String: ""     | text shown inside the element before the value |
 | value       |    String: ""     | value displayed on the object                  |
+
+## Dependencies
+NodeJS v18
 
 ## License
 
