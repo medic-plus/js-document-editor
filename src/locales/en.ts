@@ -1,0 +1,27 @@
+const locale = {
+  zoomIn: "Zoom in",
+  zoomOut: "Zoom out",
+  zoomReset: "Zoom reset",
+  toggleEditor: "Toggle edition mode",
+  paperSize: "Change paper size",
+  rotate: "Rotate page",
+  pageSizeChanged: "Paper size: ",
+  portrait: "Portrait",
+  landscape: "Landscape",
+  width: "Width",
+  height: "Height",
+  top: "Top",
+  left: "Left",
+  fontSize: "Font size",
+  textAlign: "Text align",
+  placeholder: "Placeholder",
+  alignElement: "Align element",
+  vertical: "Vertical",
+  horizontal: "Horizontal",
+  alignLeft: "Left",
+  alignCenter: "Center",
+  alignRight: "Right",
+  alignJustify: "Justify",
+} as Locale;
+
+export default locale;
