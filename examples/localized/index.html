@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>jEditor Localized Example</title>
+</head>
+
+<body>
+    <div class="hidden">
+        <!-- Styles needed here as they are dynamic and are not loaded by vite  -->
+        <div class="text-3xl rotate-45"></div>
+        <div class="text-5xl -rotate-45"></div>
+    </div>
+    <div id="jEditor"></div>
+    <script type="module">
+        import { jEditor } from "~/main";
+        import locale from "~/locales/es";
+
+        import data from "examples/localized/data";
+        import elements from "examples/localized/elements";
+        import paperSizes from "examples/localized/paper-sizes";
+        import customActions from "examples/defaults/custom-actions";
+
+        const editor = new jEditor(
+            {
+                container: "#jEditor",
+                locale: locale,
+                paperSizes: paperSizes,
+                elements: elements,
+                title: `<a href='https://github.com/medic-plus/js-document-editor'>Localized jEditor</a>`,
+                units: "cm",
+                zoomThreshold: 0.35,
+                customToolbarActions: customActions,
+            },
+            data
+        );
+
+    </script>
+</body>
+
+</html>

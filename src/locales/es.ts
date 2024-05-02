@@ -1,0 +1,27 @@
+const locale = {
+  zoomIn: "Acercar",
+  zoomOut: "Alejar",
+  zoomReset: "Reiniciar Zoom",
+  toggleEditor: "Cambiar modo de edición",
+  paperSize: "Cambiar tamaño de papel",
+  rotate: "Rotar página",
+  pageSizeChanged: "Tamaño del papel cambiado a ",
+  portrait: "Vertical",
+  landscape: "Horizontal",
+  width: "Ancho",
+  height: "Alto",
+  top: "Superior",
+  left: "Izquierda",
+  fontSize: "Tamaño de fuente",
+  textAlign: "Alineación de texto",
+  placeholder: "Texto",
+  alignElement: "Alinear elemento",
+  vertical: "Vertical",
+  horizontal: "Horizontal",
+  alignLeft: "Izquierda",
+  alignCenter: "Centrar",
+  alignRight: "Derecha",
+  alignJustify: "Justificar",
+} as Locale;
+
+export default locale;

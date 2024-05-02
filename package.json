@@ -1,12 +1,12 @@
 {
   "name": "@medicplus/js-document-editor",
-  "version": "2.2.5",
+  "version": "3.0.0-beta.0",
   "description": "javascript document maker and editor",
   "main": "dist/jeditor.js",
+  "type": "module",
   "scripts": {
-    "dev": "webpack --mode=development",
-    "watch": "webpack --watch --mode=development",
-    "build": "webpack --mode=production"
+    "dev": "vite",
+    "build": "tsc && vite build"
   },
   "repository": {
     "type": "git",
@@ -18,23 +18,21 @@
     "url": "https://github.com/medic-plus/js-document-editor/issues"
   },
   "homepage": "https://github.com/medic-plus/js-document-editor#readme",
-  "dependencies": {
-    "@fortawesome/fontawesome-free": "^6.5.1",
-    "deepmerge": "^4.3.1",
-    "interactjs": "^1.10.26"
-  },
   "devDependencies": {
-    "@babel/core": "^7.23.9",
-    "@babel/preset-env": "^7.23.9",
-    "babel-loader": "^9.1.3",
-    "css-loader": "^6.10.0",
-    "mini-css-extract-plugin": "^2.7.7",
-    "node-sass": "^9.0.0",
-    "postcss-loader": "^8.1.0",
-    "postcss-preset-env": "^9.3.0",
-    "sass-loader": "^14.1.0",
-    "style-loader": "^3.3.4",
-    "webpack": "^5.90.0",
-    "webpack-cli": "^5.1.4"
+    "@fortawesome/fontawesome-svg-core": "^6.5.2",
+    "@fortawesome/free-solid-svg-icons": "^6.5.2",
+    "@rollup/plugin-typescript": "^11.1.6",
+    "@types/node": "^20.12.8",
+    "autoprefixer": "^10.4.19",
+    "interactjs": "^1.10.27",
+    "postcss": "^8.4.38",
+    "prettier": "^3.2.5",
+    "rollup-plugin-typescript-paths": "^1.5.0",
+    "sass": "^1.76.0",
+    "tailwind": "^4.0.0",
+    "tailwindcss": "^3.4.3",
+    "tslib": "^2.6.2",
+    "typescript": "^5.4.5",
+    "vite": "^5.2.11"
   }
 }
