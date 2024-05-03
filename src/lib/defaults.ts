@@ -18,7 +18,7 @@ import {
   faArrowRight,
   faCircle,
 } from "@fortawesome/free-solid-svg-icons";
-import locale from "locales/en";
+import locale from "src/locales/en";
 
 export const defaultPaperSizes: PaperSize[] = [
   {
@@ -216,26 +216,26 @@ export const detailProperties: UIElement[] = [
 export const allowEventListener = ["button", "input"];
 
 export const defaultEditorOptions: EditorOptions = {
-  container: "#jEditor",
-  zoom: 100,
-  zoomIncrement: 10,
-  orientation: "portrait",
-  paperSizes: defaultPaperSizes,
-  toolbarActions: defaultToolbarActions,
-  customToolbarActions: [],
-  detailProperties: detailProperties,
-  positionButtons: centerPositionButtons,
-  positionButtonsClassName: "grid-cols-2",
   alignButtons: alignButtons,
-  elements: [],
-  toastDuration: 3000,
-  editorMode: true,
-  units: "in",
-  dpi: 150,
-  decimals: 2,
-  zoomThreshold: 0,
-  dragStep: 1,
   arrowStep: 1,
   arrowShiftStep: 10,
+  container: "#jEditor",
+  customToolbarActions: [],
+  decimals: 2,
+  detailProperties: detailProperties,
+  dpi: 150,
+  dragStep: 1,
+  editorMode: true,
+  elements: [],
   fontSize: 16,
+  orientation: "portrait",
+  paperSizes: defaultPaperSizes,
+  positionButtons: centerPositionButtons,
+  positionButtonsClassName: "grid-cols-2",
+  toastDuration: 3000,
+  toolbarActions: defaultToolbarActions,
+  units: "in",
+  zoom: 100,
+  zoomIncrement: 10,
+  zoomThreshold: 0,
 };

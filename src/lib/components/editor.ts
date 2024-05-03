@@ -2,20 +2,20 @@ import interact from "interactjs";
 import {
   allowEventListener,
   defaultEditorOptions as defaultOptions,
-} from "~/defaults";
+} from "src/lib/defaults";
 import {
   getBoundariesPosition,
-  getDefaultPaper,
+  getPaperSize,
   moveElementToPosition,
   pixelsToUnit,
-} from "~/utils";
+} from "src/lib/utils";
 import {
   faFileArrowUp,
   faMagnifyingGlass,
   faRulerCombined,
 } from "@fortawesome/free-solid-svg-icons";
 import { icon } from "@fortawesome/fontawesome-svg-core";
-import Component from "~/components/component";
+import Component from "src/lib/components/component";
 
 export default class Editor
   extends Component
@@ -29,7 +29,7 @@ export default class Editor
   }
 
   render() {
-    if (this.getSection()) {
+    if (this.getSection() || this._rendered) {
       this.getSection().remove();
     }
     // Container element
@@ -67,10 +67,10 @@ export default class Editor
     const options = this.getOptions();
     // Page size
     const pageSizeDiv = document.createElement("div");
-    const paper = options.paperSize;
-    const paperName = paper?.displayName ?? paper?.name;
-    const description = paper?.description
-      ? `<span class="hidden md:flex">(${paper?.description})</span>`
+    const paper = getPaperSize(options, options.paperSize);
+    const paperName = paper.displayName ?? paper.name;
+    const description = paper.description
+      ? `<span class="hidden md:flex">(${paper.description})</span>`
       : "";
     pageSizeDiv.innerHTML = `${icon(faRulerCombined).html.toString()} ${paperName} ${description}`;
     // Page orientation
@@ -118,13 +118,13 @@ export default class Editor
     return this.getPage().querySelector(`.element.active`) as HTMLElement;
   }
 
-  setPaperSize(paperSize?: PaperSize, orientation?: string) {
+  setPaperSize(paperName?: string, orientation?: string) {
     const page = this.getPage();
-    paperSize = paperSize ?? getDefaultPaper(this.getOptions());
+    const paperSize = getPaperSize(this.getOptions(), paperName);
     orientation = orientation ?? this.getOptions().orientation;
     if (page) {
       page.className = `page ${paperSize.name} ${orientation}`;
-      this._parent.mergeOptions({ paperSize, orientation });
+      this._parent.mergeOptions({ paperSize: paperSize.name, orientation });
       console.debug("Set paper size: %s (%s)", paperSize.name, orientation);
       this.renderBanner();
     }
@@ -215,7 +215,7 @@ export default class Editor
       "px";
     const placeholder = data.placeholder ?? element.placeholder ?? "";
     container.innerHTML = placeholder + element.value;
-    container.onclick = (event) => {
+    container.onclick = () => {
       if (_this.getEditorMode()) {
         this.selectElement(data.element);
         this.getSidebar().showDetails(data.element);

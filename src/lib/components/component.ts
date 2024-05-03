@@ -1,4 +1,4 @@
-import { defaultLocale } from "~/defaults";
+import { defaultLocale } from "src/lib/defaults";
 
 export default class Component {
   _parent: JEditor;

@@ -6,12 +6,23 @@ export const getDefaultPaper = (options: EditorOptions): PaperSize => {
   throw Error("Paper sizes have not been set");
 };
 
+export const getPaperSize = (
+  options: EditorOptions,
+  paperName?: string
+): PaperSize => {
+  if (paperName) {
+    const size = options.paperSizes?.find((size) => size.name === paperName);
+    return size ?? getDefaultPaper(options);
+  }
+  return getDefaultPaper(options);
+};
+
 export const getNextPageSize = (options: EditorOptions): PaperSize => {
   const sizes = options.paperSizes;
-  const actual = options.paperSize ?? getDefaultPaper(options);
+  let actual = getPaperSize(options, options.paperSize);
   const index = sizes?.findIndex((size) => size.name === actual.name);
   if (index !== undefined && index !== -1 && sizes) {
-    const newIndex = index + 1 > sizes.length ? 0 : index + 1;
+    const newIndex = index + 1 >= sizes.length ? 0 : index + 1;
     return sizes[newIndex];
   }
   return actual;

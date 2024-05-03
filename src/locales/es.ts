@@ -1,4 +1,4 @@
-const locale = {
+const locale: Locale = {
   zoomIn: "Acercar",
   zoomOut: "Alejar",
   zoomReset: "Reiniciar Zoom",

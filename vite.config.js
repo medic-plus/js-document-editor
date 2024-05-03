@@ -1,5 +1,5 @@
 import { defineConfig } from "vite";
-import path from "path";
+import { resolve } from "path";
 import typescript from "@rollup/plugin-typescript";
 import { typescriptPaths } from "rollup-plugin-typescript-paths";
 
@@ -7,11 +7,7 @@ export default defineConfig({
   plugins: [],
   resolve: {
     alias: {
-      "~": path.resolve(__dirname, "./src"),
-      locales: path.resolve(__dirname, "./src/locales"),
-      sass: path.resolve(__dirname, "./src/sass"),
-      themes: path.resolve(__dirname, "./src/sass/themes"),
-      examples: path.resolve(__dirname, "./examples"),
+      src: resolve(__dirname, "./src"),
     },
   },
   server: {
@@ -22,10 +18,12 @@ export default defineConfig({
     minify: true,
     reportCompressedSize: true,
     lib: {
-      entry: path.resolve(__dirname, "src/main.ts"),
+      entry: resolve(__dirname, "src/index.ts"),
+      name: "jeditor",
       fileName: "jeditor",
-      formats: ["es", "cjs"],
+      formats: ["es"],
     },
+    target: "esnext",
     rollupOptions: {
       external: [],
       plugins: [
@@ -34,8 +32,9 @@ export default defineConfig({
         }),
         typescript({
           sourceMap: false,
-          declaration: true,
+          declaration: false,
           outDir: "dist",
+          tsconfig: "./tsconfig.json",
         }),
       ],
       output: {

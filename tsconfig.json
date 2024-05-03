@@ -12,38 +12,33 @@
         ],
         "allowJs": false,
         "skipLibCheck": true,
-        "esModuleInterop": false,
+        "sourceMap": true,
+        "esModuleInterop": true,
         "allowSyntheticDefaultImports": true,
-        "strict": true,
         "forceConsistentCasingInFileNames": true,
         "module": "ESNext",
-        "moduleResolution": "Node",
+        "declaration": true,
+        /* Bundler mode */
+        "moduleResolution": "Bundler",
         "resolveJsonModule": true,
         "isolatedModules": true,
         "noEmit": true,
         "jsx": "preserve",
+        "outDir": "dist",
+        /* Linting */
+        "strict": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "noImplicitReturns": true,
         "baseUrl": "./",
         "paths": {
-            "~/*": [
-                "src/*"
+            "src/*": [
+                "./src/*"
             ],
-            "locales/*": [
-                "src/locales/*"
-            ],
-            "sass/*": [
-                "src/sass/*"
-            ],
-            "themes/*": [
-                "src/sass/themes/*"
-            ],
-            "examples/*": [
-                "examples/*"
-            ]
         }
     },
     "include": [
-        "./src",
-        "./examples",
+        "src/**/*.ts",
         "src/types.d.ts"
     ],
     "exclude": [

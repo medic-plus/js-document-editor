@@ -10,7 +10,7 @@ interface JEditor {
   getData(): EditorData[];
   // setData(data: EditorData): void;
   // mergeData(data: any): EditorData;
-  setPaperSize(paperSize: PaperSize, orientation?: string): void;
+  setPaperSize(paperName?: string, orientation?: string): void;
   showToast(message: string, className?: string, timeout?: number);
 }
 
@@ -31,7 +31,6 @@ interface EditorSideBar {
   toolbarAction(action: string): void;
   showDetails(key: string): void;
   hiddeDetails(): void;
-  detailsAction(key: string, action: string): void;
 }
 
 interface EditorContainer {
@@ -40,7 +39,7 @@ interface EditorContainer {
   getPageWrapper(): HTMLElement;
   getPage(): HTMLElement;
   getActiveElement(): HTMLElement | undefined;
-  setPaperSize(paperSize?: PaperSize, orientation?: string): void;
+  setPaperSize(paperName?: string, orientation?: string): void;
   setZoom(value: number): void;
   zoomIn(): void;
   zoomOut(): void;
@@ -64,31 +63,32 @@ interface EditorToasts {
 }
 
 interface EditorOptions {
-  container: string;
-  title?: string;
-  zoom?: number;
-  zoomIncrement?: number;
-  locale?: Locale;
-  orientation?: string;
-  elements: EditorElement[];
-  paperSize?: PaperSize;
-  paperSizes?: PaperSize[];
-  toolbarActions?: ToolbarAction[];
-  customToolbarActions?: CustomToolbarAction[];
-  detailProperties?: UIElement[];
   alignButtons?: (UIElement & AlignButton)[];
-  positionButtons?: (UIElement & PositionButton)[];
-  positionButtonsClassName?: string;
-  toastDuration?: number;
-  editorMode?: boolean;
-  units: string;
-  decimals?: number;
-  dpi?: number;
-  zoomThreshold?: number;
-  dragStep?: number;
   arrowStep?: number;
   arrowShiftStep?: number;
+  background?: string;
+  container: string;
+  customToolbarActions?: CustomToolbarAction[];
+  decimals?: number;
+  detailProperties?: UIElement[];
+  dpi?: number;
+  dragStep?: number;
+  editorMode?: boolean;
+  elements: EditorElement[];
   fontSize?: number;
+  locale?: Locale;
+  orientation?: string;
+  paperSize?: string;
+  paperSizes?: PaperSize[];
+  positionButtons?: (UIElement & PositionButton)[];
+  positionButtonsClassName?: string;
+  title?: string;
+  toastDuration?: number;
+  toolbarActions?: ToolbarAction[];
+  units: string;
+  zoom?: number;
+  zoomIncrement?: number;
+  zoomThreshold?: number;
 }
 
 interface Locale {

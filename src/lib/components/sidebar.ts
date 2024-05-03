@@ -1,7 +1,7 @@
 import { icon } from "@fortawesome/fontawesome-svg-core";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
-import { getNextPageSize } from "~/utils";
-import Component from "~/components/component";
+import { getNextPageSize } from "src/lib/utils";
+import Component from "src/lib/components/component";
 
 export default class SideBar
   extends Component
@@ -185,7 +185,8 @@ export default class SideBar
       case "zoomReset":
         return this.getEditor().resetZoom();
       case "paperSize":
-        return this._parent.setPaperSize(getNextPageSize(this.getOptions()));
+        const paper = getNextPageSize(this.getOptions());
+        return this._parent.setPaperSize(paper.name);
       case "rotate":
         const isPortrait = this.getOptions().orientation === "portrait";
         return this.getEditor().setPaperSize(
@@ -369,6 +370,4 @@ export default class SideBar
     const activeDetails = this.getSection().querySelectorAll(selector);
     activeDetails.forEach((detail) => detail.classList.remove("selected"));
   }
-
-  detailsAction(key: string, action: string): void {}
 }

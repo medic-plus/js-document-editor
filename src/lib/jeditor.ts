@@ -1,8 +1,8 @@
-import SideBar from "~/components/sidebar";
-import Editor from "~/components/editor";
-import { defaultEditorOptions } from "~/defaults";
-import { mergeDeep } from "~/utils";
-import Toasts from "~/components/toasts";
+import SideBar from "src/lib/components/sidebar";
+import Editor from "src/lib/components/editor";
+import { defaultEditorOptions } from "src/lib/defaults";
+import { mergeDeep } from "src/lib/utils";
+import Toasts from "src/lib/components/toasts";
 
 export class jEditor implements JEditor {
   private _options: EditorOptions;
@@ -62,8 +62,8 @@ export class jEditor implements JEditor {
     return this._data;
   }
 
-  setPaperSize(paperSize: PaperSize, orientation?: string): void {
-    this._editor.setPaperSize(paperSize, orientation);
+  setPaperSize(paperName?: string, orientation?: string): void {
+    this._editor.setPaperSize(paperName, orientation);
   }
 
   showToast(message: string, className?: string, timeout?: number): void {

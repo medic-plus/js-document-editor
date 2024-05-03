@@ -1,6 +1,6 @@
 import { icon } from "@fortawesome/fontawesome-svg-core";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
-import Component from "~/components/component";
+import Component from "src/lib/components/component";
 
 export default class Toasts
   extends Component

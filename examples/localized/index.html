@@ -17,13 +17,13 @@
     </div>
     <div id="jEditor"></div>
     <script type="module">
-        import { jEditor } from "~/main";
-        import locale from "~/locales/es";
+        import { jEditor } from "src/index";
+        import locale from "src/locales/es";
 
-        import data from "examples/localized/data";
-        import elements from "examples/localized/elements";
-        import paperSizes from "examples/localized/paper-sizes";
-        import customActions from "examples/defaults/custom-actions";
+        import data from "./data";
+        import elements from "./elements";
+        import paperSizes from "./paper-sizes";
+        import customActions from "../defaults/custom-actions";
 
         const editor = new jEditor(
             {

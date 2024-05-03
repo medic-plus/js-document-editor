@@ -17,15 +17,15 @@
     </div>
     <div id="jEditor"></div>
     <script type="module">
-        import { jEditor } from "~/main";
-        import "themes/default.scss";
-        import "themes/green.scss";
-        import "themes/pink.scss";
-        import "themes/teal.scss";
+        import { jEditor } from "src/index";
+        import "src/sass/themes/default.scss";
+        import "src/sass/themes/green.scss";
+        import "src/sass/themes/pink.scss";
+        import "src/sass/themes/teal.scss";
 
-        import data from "examples/defaults/data";
-        import elements from "examples/defaults/elements";
-        import customActions from "examples/themed/custom-actions";
+        import data from "../defaults/data";
+        import elements from "../defaults/elements";
+        import customActions from "./custom-actions";
 
         const editor = new jEditor(
             {
