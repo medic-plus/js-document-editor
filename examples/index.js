@@ -1,5 +1,4 @@
 import { jEditor } from "src/index";
-import { defaultPaperSizes } from "src/lib/defaults";
 
 import data from "./defaults/data";
 import elements from "./defaults/elements";

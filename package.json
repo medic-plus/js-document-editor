@@ -1,7 +1,7 @@
 {
   "name": "@medicplus/js-document-editor",
-  "version": "3.0.0-beta.1",
-  "description": "javascript document maker and editor",
+  "version": "3.0.0-beta.2",
+  "description": "A simple and extensible JavaScript document editor",
   "main": "dist/jeditor.js",
   "type": "module",
   "scripts": {
