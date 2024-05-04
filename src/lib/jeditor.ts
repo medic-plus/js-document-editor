@@ -165,12 +165,12 @@ export class jEditor implements JEditor {
 
   setTheme(theme: string) {
     const container = document.querySelector(this._options.container);
+    container?.setAttribute("theme", theme);
     if (!defaultThemes.includes(theme)) {
-      throw new Error(
-        `Theme "${theme}" is not a default theme, you can set your own custom theme`
+      console.warn(
+        `Theme "${theme}" is not a default theme, make sure you have set your own custom theme with [data-container="jeditor"][data-theme="${theme}"]`
       );
     }
-    container?.setAttribute("theme", theme);
   }
 
   getDefaultThemes(): string[] {
