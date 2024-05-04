@@ -1,4 +1,4 @@
-const data: EditorData[] = [
+const data = [
   {
     element: "title",
     width: 600,

@@ -1,0 +1,27 @@
+title: jEditor
+author:
+  name: Ivan Vasquez
+  url: https://ivanvasquez.net
+
+description: >
+  jEditor (js-document-editor) is a simple and extensible JavaScript document editor, 
+  which allows you to define a document and then drag and resize elements.
+
+# theme: minima
+
+remote_theme: jekyll/minima
+
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+# header_pages:
+# - about.md
+
+repos:
+  - name: medic-plus/js-document-editor
+    description:
+    url: https://github.com/medic-plus/js-document-editor
+
+minima:
+  skin: auto

@@ -17,9 +17,10 @@ export default class Toasts
     }
     // Toasts container
     const toasts = document.createElement("div");
+    const sidebarPosition = this._parent.getOptions().sidebarPosition;
+    const classPosition = sidebarPosition === "left" ? "right-0" : "left-0";
+    toasts.className = `fixed top-14 ${classPosition} px-3 py-2 z-50 flex flex-col gap-2 justify-around`;
     toasts.setAttribute("data-container", "toasts");
-    toasts.className =
-      "fixed top-10 right-0 p-5 z-50 flex flex-col gap-2 justify-around";
     // Add to main container
     const container = document.querySelector(this.getOptions().container);
     container?.appendChild(toasts);

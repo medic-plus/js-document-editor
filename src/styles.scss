@@ -13,7 +13,7 @@
     @apply bg-white/[0.5];
   }
   [data-container="sidebar"] {
-    @apply flex flex-col bg-neutral-800 text-white min-w-fit items-center;
+    @apply flex flex-col bg-neutral-800 text-white min-w-fit max-w-full items-center;
   }
   [data-container="elements"] li.in-editor {
     @apply bg-primary-800;
@@ -42,11 +42,12 @@
   [data-container="details"] input {
     @apply grow p-2 rounded appearance-none bg-black/[.2] hover:bg-white/[.2] focus:border focus:border-neutral-500;
   }
-  [data-container="toolbar"] button {
-    @apply p-4 hover:bg-neutral-500 rounded;
+  [data-container="toolbar"] button,
+  [data-container="custom-toolbar"] button {
+    @apply px-4 py-3 hover:bg-neutral-500 rounded;
   }
   [data-container="editor"] {
-    @apply grow flex flex-col overflow-auto;
+    @apply grow flex flex-col overflow-auto min-h-svh md:min-h-1;
   }
   [data-container="banner"] div {
     @apply text-sm text-white/[.7] p-2 px-4 bg-black/[.1] rounded-lg flex gap-3 items-center;
@@ -58,7 +59,7 @@
     @apply absolute rounded bg-black/[.02] select-none shadow-[0_0_0_2px_rgba(0,0,0,0.25)];
   }
   .page .element.active {
-    @apply shadow-[0_0_0_4px_var(--primary-500)];
+    @apply z-10 shadow-[0_0_0_4px_var(--primary-500)];
   }
   .page .element.rendered {
     @apply shadow-[0_0_0_0px_transparent] bg-transparent;
