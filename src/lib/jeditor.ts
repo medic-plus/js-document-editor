@@ -37,6 +37,7 @@ export class jEditor implements JEditor {
     const flexDirection = `${this._options.sidebarPosition === "left" ? "md:flex-row" : "md:flex-row-reverse"}`;
     container.className = `flex flex-col ${flexDirection} w-full h-full`;
     container.setAttribute("data-container", "jeditor");
+    container.setAttribute("data-theme", this._options.theme ?? "default");
     if (this._rendered) {
       container.innerHTML = "";
       this._sidebar = new SideBar(this);
@@ -165,7 +166,7 @@ export class jEditor implements JEditor {
 
   setTheme(theme: string) {
     const container = document.querySelector(this._options.container);
-    container?.setAttribute("theme", theme);
+    container?.setAttribute("data-theme", theme);
     if (!defaultThemes.includes(theme)) {
       console.warn(
         `Theme "${theme}" is not a default theme, make sure you have set your own custom theme with [data-container="jeditor"][data-theme="${theme}"]`

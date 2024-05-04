@@ -237,6 +237,7 @@ export const defaultEditorOptions: EditorOptions = {
   paperSizes: defaultPaperSizes,
   positionButtons: centerPositionButtons,
   positionButtonsClassName: "grid-cols-2",
+  theme: "default",
   toastDuration: 3000,
   toolbarActions: defaultToolbarActions,
   sidebarPosition: "left",

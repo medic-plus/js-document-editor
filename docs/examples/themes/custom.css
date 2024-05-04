@@ -1,0 +1,57 @@
+.grid-cols-4 {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+[data-container="jeditor"][data-theme="first"] {
+  --primary-50: #fbf6f5;
+  --primary-100: #f6ecea;
+  --primary-200: #f0dcd8;
+  --primary-300: #e4c3bd;
+  --primary-400: #d3a096;
+  --primary-500: #ba7264;
+  --primary-600: #aa6558;
+  --primary-700: #8e5347;
+  --primary-800: #77463d;
+  --primary-900: #643f38;
+  --primary-950: #351e1a;
+}
+[data-container="jeditor"][data-theme="second"] {
+  --primary-50: #fffbeb;
+  --primary-100: #fef3c7;
+  --primary-200: #fde58a;
+  --primary-300: #fbd24e;
+  --primary-400: #fabe25;
+  --primary-500: #f49d0c;
+  --primary-600: #d87607;
+  --primary-700: #bc560a;
+  --primary-800: #923f0e;
+  --primary-900: #78340f;
+  --primary-950: #451a03;
+}
+
+[data-container="jeditor"][data-theme="third"] {
+  --primary-50: #f6f6f6;
+  --primary-100: #e7e7e7;
+  --primary-200: #d1d1d1;
+  --primary-300: #b0b0b0;
+  --primary-400: #505050;
+  --primary-500: #404040;
+  --primary-600: #303030;
+  --primary-700: #202020;
+  --primary-800: #151515;
+  --primary-900: #050505;
+  --primary-950: #000000;
+}
+[data-container="jeditor"][data-theme="fourth"] {
+  --primary-50: #f2f7fb;
+  --primary-100: #e7f0f8;
+  --primary-200: #d3e2f2;
+  --primary-300: #b9cfe8;
+  --primary-400: #9cb6dd;
+  --primary-500: #839dd1;
+  --primary-600: #6a7fc1;
+  --primary-700: #6374ae;
+  --primary-800: #4a5989;
+  --primary-900: #414e6e;
+  --primary-950: #262c40;
+}
