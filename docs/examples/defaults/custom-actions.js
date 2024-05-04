@@ -1,12 +1,12 @@
 const customActions = [
   {
     action: (editor) => {},
-    content: '<span class="fa fa-magic"></span> Default View',
+    content: "Default View",
     className: "text-sm",
   },
   {
     action: (editor) => {},
-    content: '<span class="fa fa-magic"></span> Clear Background',
+    content: "Clear Background",
     className: "text-sm",
   },
   {

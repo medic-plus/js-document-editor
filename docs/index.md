@@ -73,7 +73,10 @@ const myEditor = new jEditor(options, data);
 
 ## Documentation
 
-You can check our [GitHub pages site](https://medic-plus.github.io/js-document-editor/) with the full options and functions list and some examples on what you can do
+You can get more details on how to change and extend the default configuration and functions for the editor:
+
+- [How to use?](./pages/using-jeditor.md)
+- [Configuration](./pages/configuration.md)
 
 ## What's new on v3.x?
 
@@ -87,4 +90,4 @@ A full redesign of the UI has been implemented on this new version, and a full r
 
 ## Migrating from v2.x
 
-You can find the details on the [Migration guide](./migrate-v2.x-v3.x.md)
+You can find the details on the [Migration guide](./pages/migrate-v2.x-v3.x.md)

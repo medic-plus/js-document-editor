@@ -1,6 +1,6 @@
-const data: EditorData[] = [
+const data = [
   {
-    element: "titulo",
+    element: "title",
     width: 600,
     height: 125,
     left: 338,
@@ -8,7 +8,7 @@ const data: EditorData[] = [
     align: "center",
   },
   {
-    element: "fecha",
+    element: "date",
     fontSize: 20,
     width: 300,
     height: 30,
@@ -17,7 +17,7 @@ const data: EditorData[] = [
     align: "right",
   },
   {
-    element: "nombre-documento",
+    element: "document-name",
     fontSize: 25,
     width: 600,
     height: 35,
@@ -25,7 +25,7 @@ const data: EditorData[] = [
     top: 230,
   },
   {
-    element: "contenido-documento",
+    element: "document-content",
     fontSize: 20,
     width: 1150,
     height: 1150,
@@ -40,21 +40,21 @@ const data: EditorData[] = [
     top: 50,
   },
   {
-    element: "linea-1",
+    element: "divider-1",
     width: 1150,
     height: 15,
     left: 63,
     top: 200,
   },
   {
-    element: "linea-2",
+    element: "divider-2",
     width: 1150,
     height: 15,
     left: 63,
     top: 1450,
   },
   {
-    element: "firma",
+    element: "signature",
     width: 300,
     height: 75,
     left: 488,

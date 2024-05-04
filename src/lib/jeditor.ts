@@ -1,6 +1,10 @@
 import SideBar from "src/lib/components/sidebar";
 import Editor from "src/lib/components/editor";
-import { defaultEditorOptions, defaultLocales } from "src/lib/defaults";
+import {
+  defaultEditorOptions,
+  defaultLocales,
+  defaultThemes,
+} from "src/lib/defaults";
 import { mergeDeep } from "src/lib/utils";
 import Toasts from "src/lib/components/toasts";
 
@@ -32,6 +36,7 @@ export class jEditor implements JEditor {
     }
     const flexDirection = `${this._options.sidebarPosition === "left" ? "md:flex-row" : "md:flex-row-reverse"}`;
     container.className = `flex flex-col ${flexDirection} w-full h-full`;
+    container.setAttribute("data-container", "jeditor");
     if (this._rendered) {
       container.innerHTML = "";
       this._sidebar = new SideBar(this);
@@ -156,5 +161,19 @@ export class jEditor implements JEditor {
 
   getDefaultLocales(): Map<string, Locale> {
     return defaultLocales;
+  }
+
+  setTheme(theme: string) {
+    const container = document.querySelector(this._options.container);
+    if (!defaultThemes.includes(theme)) {
+      throw new Error(
+        `Theme "${theme}" is not a default theme, you can set your own custom theme`
+      );
+    }
+    container?.setAttribute("theme", theme);
+  }
+
+  getDefaultThemes(): string[] {
+    return defaultThemes;
   }
 }

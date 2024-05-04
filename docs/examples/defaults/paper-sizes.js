@@ -1,4 +1,4 @@
-const paperSizes: PaperSize[] = [
+const paperSizes = [
   {
     name: "letter",
     displayName: "Carta",

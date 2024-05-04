@@ -7,32 +7,31 @@
     <meta name="viewport" content="width=device-width">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>jEditor Themes Example</title>
+    <link type="text/css" rel="stylesheet"
+        href="https://unpkg.com/@medicplus/js-document-editor@beta/dist/jeditor.css" />
+    <style id="theme"></style>
 </head>
 
 <body>
     <div id="jEditor"></div>
+    <script src="https://unpkg.com/@medicplus/js-document-editor@beta/dist/jeditor.js" type="module"></script>
     <script type="module">
-        import { jEditor } from "src/index";
-        import "src/sass/themes/default.scss";
-        import "src/sass/themes/green.scss";
-        import "src/sass/themes/pink.scss";
-        import "src/sass/themes/teal.scss";
-
-        import data from "../defaults/data";
-        import elements from "../defaults/elements";
-        import customActions from "./custom-actions";
+        import data from "../defaults/data.js";
+        import elements from "../defaults/elements.js";
+        import { customActions } from "./custom-actions.js";
 
         const editor = new jEditor(
             {
                 container: "#jEditor",
                 elements: elements,
-                title: `<a href='https://github.com/medic-plus/js-document-editor'> Themed jEditor</a>`,
-                zoomThreshold: 0.35,
+                title: `<a href='https://github.com/medic-plus/js-document-editor'>jEditor Themes</a>`,
+                units: "cm",
+                zoomThreshold: 0.2,
                 customToolbarActions: customActions,
             },
             data
         );
-
+        window.editor = editor;
     </script>
 </body>
 
