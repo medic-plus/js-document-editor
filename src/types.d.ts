@@ -94,6 +94,7 @@ interface EditorOptions {
   positionButtons?: (UIElement & PositionButton)[];
   positionButtonsClassName?: string;
   sidebarPosition?: "left" | "right";
+  theme?: string;
   title?: string;
   toastDuration?: number;
   toolbarActions?: ToolbarAction[];
