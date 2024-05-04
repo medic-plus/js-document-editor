@@ -26,6 +26,14 @@ export default class Component {
     return this._parent.getData();
   }
 
+  hasData(key: string): boolean {
+    return this._parent.hasData(key);
+  }
+
+  mergeData(key: string, data: any): EditorData {
+    return this._parent.mergeData(key, data);
+  }
+
   getLocalizedText(entry?: string): string {
     if (!entry) {
       return "";

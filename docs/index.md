@@ -1,4 +1,9 @@
-# What is jEditor?
+---
+permalink: /
+title: Introduction
+---
+
+## What is jEditor?
 
 jEditor (js-document-editor) is a simple and extensible JavaScript document editor, which allows you to define a document and then drag and resize elements.
 
@@ -19,7 +24,7 @@ The easiest way to get started is to use the Unpkg CDN in your website:
 <script
   src="https://unpkg.com/@medicplus/js-document-editor/dist/jeditor.js"
   type="module"
-/>
+></script>
 ```
 
 Using yarn:
@@ -37,6 +42,7 @@ npm install @medicplus/js-document-editor --save
 Now you are ready to use your editor, just create a `<div id="myEditor"></div>` element in your website:
 
 ```javascript
+// This is not required if you are using CDN imports
 import { jEditor } from "@medic-plus/js-document-editor/dist/jeditor";
 
 // If you are using TypeScript (npm, yarn or pnpm) you can import from src path and have type validation

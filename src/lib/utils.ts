@@ -28,7 +28,7 @@ export const getNextPageSize = (options: EditorOptions): PaperSize => {
   return actual;
 };
 
-export const pixelsToUnit = (options: EditorOptions, value: number) => {
+export const pixelsToUnit = (options: EditorOptions, value: number): number => {
   const dpi = options.dpi ?? 150;
   const decimals = options.decimals ?? 2;
   const INCH_TO_MM = 25.4;
@@ -45,8 +45,8 @@ export const pixelsToUnit = (options: EditorOptions, value: number) => {
   }
 };
 
-export const roundDecimals = (value: number, decimals: number) => {
-  return value.toFixed(decimals);
+export const roundDecimals = (value: number, decimals: number): number => {
+  return Number(value.toFixed(decimals));
 };
 
 export const getBoundariesPosition = (

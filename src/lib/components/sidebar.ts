@@ -21,8 +21,7 @@ export default class SideBar
     sidebar.setAttribute("data-container", "sidebar");
     // Editor title
     const title = document.createElement("h1");
-    title.className =
-      "text-xl font-bold py-3 bg-primary-700 w-full text-center";
+    title.className = `text-xl font-bold py-3 bg-primary-700 w-full text-center`;
     title.innerHTML = this.getOptions().title ?? "jEditor";
     sidebar.appendChild(title);
     // Elements list
@@ -30,16 +29,40 @@ export default class SideBar
     elementsList.setAttribute("data-container", "elements");
     elementsList.className = "grow w-full overflow-y-auto";
     sidebar.appendChild(elementsList);
+    // Custom toolbar
+    const customToolbar = document.createElement("div");
+    customToolbar.setAttribute("data-container", "custom-toolbar");
+    customToolbar.className = `bottom-0 gap-1 p-1 ${this.getOptions().customToolbarClassName ?? "flex flex-row"}`;
+    sidebar.appendChild(customToolbar);
     // Toolbar
     const toolbar = document.createElement("div");
     toolbar.setAttribute("data-container", "toolbar");
-    toolbar.className = "bottom-0 flex flex-row gap-1";
+    toolbar.className = "bottom-0 flex flex-row gap-1 p-1";
     sidebar.appendChild(toolbar);
     // Add to main container
     const container = document.querySelector(this.getOptions().container);
     container?.appendChild(sidebar);
     this.renderElementsList();
+    this.renderCustomToolbar();
     this.renderToolbar();
+  }
+
+  renderCustomToolbar() {
+    const parent = this._parent;
+    const toolbar = this.getCustomToolbar();
+    toolbar.innerHTML = "";
+    this.getOptions().customToolbarActions?.map((tbAction) => {
+      const button = document.createElement("button");
+      button.className = `group ${tbAction.className ?? ""}`;
+      button.innerHTML = tbAction.content;
+      button.onclick = () => tbAction.action(parent);
+      // Button tooltip
+      if (tbAction.tooltip) {
+        const tooltip = this.createTooltipElement(tbAction.tooltip);
+        button.appendChild(tooltip);
+      }
+      toolbar.appendChild(button);
+    });
   }
 
   renderToolbar() {
@@ -67,10 +90,7 @@ export default class SideBar
       item.className = "hover:!bg-primary-900 border-b border-black/[0.2]";
       const wrapper = document.createElement("div");
       wrapper.className = "w-full flex flex-row gap-2";
-      const defined = this.getData().find(
-        (data) => data.element === element.key
-      );
-      if (defined) {
+      if (this.hasData(element.key)) {
         item.classList.add("in-editor");
       }
       item.setAttribute("data-key", element.key);
@@ -80,8 +100,7 @@ export default class SideBar
       content.onclick = () => this.clickElementListItem(element.key);
       // Properties button
       const button = document.createElement("button");
-      button.className =
-        "action hidden px-3 bg-black/[.2] hover:bg-primary-500";
+      button.className = `action hidden px-3 bg-black/[.2] hover:bg-primary-500`;
       button.innerHTML = icon(faXmark).html.toString();
       button.onclick = () => this.hideElementListItem(element.key);
       // Details div
@@ -123,6 +142,12 @@ export default class SideBar
     ) as HTMLElement;
   }
 
+  getCustomToolbar(): HTMLElement {
+    return this.getSection().querySelector(
+      `[data-container='custom-toolbar']`
+    ) as HTMLElement;
+  }
+
   getElementsListItem(key: string): HTMLElement | undefined {
     return this.getElementsList().querySelector(
       `[data-key='${key}']`
@@ -130,8 +155,7 @@ export default class SideBar
   }
 
   clickElementListItem(key: string): void {
-    const index = this.getData().findIndex((e) => e.element === key);
-    if (index === -1) {
+    if (!this.hasData(key)) {
       this.showElementListItem(key);
     } else if (this.getEditorMode()) {
       this.getEditor().selectElement(key);
@@ -140,8 +164,7 @@ export default class SideBar
   }
 
   showElementListItem(key: string): void {
-    const index = this.getData().findIndex((e) => e.element === key);
-    if (index === -1) {
+    if (!this.hasData(key)) {
       const element = this.getOptions().elements.find((e) => e.key === key);
       if (element) {
         const data = {
@@ -153,7 +176,7 @@ export default class SideBar
           align: element.align,
           fontSize: element.fontSize,
         } as EditorData;
-        this.getData().push(data);
+        this._parent.pushData(data);
         this.getEditor().renderElements();
         this.renderElementsList();
         this.clickElementListItem(key);
@@ -162,9 +185,8 @@ export default class SideBar
   }
 
   hideElementListItem(key: string): void {
-    const index = this.getData().findIndex((e) => e.element === key);
-    if (index !== -1) {
-      this.getData().splice(index, 1);
+    if (this.hasData(key)) {
+      this._parent.pullData(key);
       this.getEditor().renderElements();
       this.renderElementsList();
     }
@@ -204,11 +226,11 @@ export default class SideBar
       container.innerHTML = "";
       const details = this.getEditor().getElementDetails(key);
       const element = this.getOptions().elements.find((e) => e.key === key);
-      const data = this.getData().find((d) => d.element === key);
+      const data = this._parent.getElementData(key);
       container.append(this.detailsProperties(details));
       const legend = document.createElement("p");
       legend.className = "legend";
-      if (element && data) {
+      if (element) {
         if (element.settings?.fontSize !== false) {
           const fontLegend = legend.cloneNode() as HTMLElement;
           fontLegend.innerHTML = this.getLocalizedText("fontSize");
@@ -227,11 +249,11 @@ export default class SideBar
           container.append(alignLegend);
           container.append(this.detailsAlign(element, data));
         }
+        const posLegend = legend.cloneNode() as HTMLElement;
+        posLegend.innerHTML = this.getLocalizedText("alignElement");
+        container.append(posLegend);
+        container.append(this.detailsPosition(element));
       }
-      const posLegend = legend.cloneNode() as HTMLElement;
-      posLegend.innerHTML = this.getLocalizedText("alignElement");
-      container.append(posLegend);
-      container.append(this.detailsPosition());
       li.classList.add("selected");
     }
   }
@@ -256,7 +278,7 @@ export default class SideBar
     return wrapper;
   }
 
-  private detailsAlign(element: EditorElement, data: EditorData): HTMLElement {
+  private detailsAlign(element: EditorElement, data?: EditorData): HTMLElement {
     const wrapper = document.createElement("div");
     wrapper.setAttribute("container", "align-wrapper");
     const buttons = this.getOptions().alignButtons ?? [];
@@ -272,9 +294,9 @@ export default class SideBar
       button.innerHTML = icon(align.icon).html.toString();
       button.onclick = () => {
         console.debug("Align %s: %s", element.key, align.value);
-        data.align = align.value;
-        this.showDetails(element.key);
+        this.mergeData(element.key, { align: align.value });
         this.getEditor().renderElements();
+        this.getEditor().selectElement(element.key);
       };
       button.append(
         this.createTooltipElement(this.getLocalizedText(align.localeText))
@@ -287,7 +309,7 @@ export default class SideBar
 
   private detailsFontSize(
     element: EditorElement,
-    data: EditorData
+    data?: EditorData
   ): HTMLElement {
     const parent = this._parent;
     const wrapper = document.createElement("div");
@@ -295,16 +317,13 @@ export default class SideBar
     wrapper.setAttribute("container", "font-size-wrapper");
     const input = document.createElement("input");
     const fontSizeChange = (event: any) => {
-      const data = parent.getData().find((d) => d.element === element.key);
-      if (data) {
-        data.fontSize = event.target.value;
-      }
+      parent.mergeData(element.key, { fontSize: event.target.value * 1 });
       parent.renderElements();
+      parent.getEditor().selectElement(element.key);
     };
-    input.value = (data.fontSize ??
-      element.fontSize ??
-      this.getOptions().fontSize ??
-      "") as string;
+    const fontSize =
+      data?.fontSize ?? element.fontSize ?? this.getOptions().fontSize;
+    input.value = (fontSize ?? "") as string;
     input.type = "number";
     input.setAttribute("data-key", element.key);
     input.onchange = fontSizeChange;
@@ -315,7 +334,7 @@ export default class SideBar
 
   private detailsPlaceholder(
     element: EditorElement,
-    data: EditorData
+    data?: EditorData
   ): HTMLElement {
     const parent = this._parent;
     const wrapper = document.createElement("div");
@@ -323,13 +342,11 @@ export default class SideBar
     wrapper.setAttribute("container", "placeholder-wrapper");
     const input = document.createElement("input");
     const placeholderChange = (event: any) => {
-      const data = parent.getData().find((d) => d.element === element.key);
-      if (data) {
-        data.placeholder = event.target.value;
-      }
+      parent.mergeData(element.key, { placeholder: event.target.value });
       parent.renderElements();
+      parent.getEditor().selectElement(element.key);
     };
-    input.value = data.placeholder ?? element.placeholder ?? "";
+    input.value = data?.placeholder ?? element.placeholder ?? "";
     input.type = "text";
     input.setAttribute("data-key", element.key);
     input.onchange = placeholderChange;
@@ -338,7 +355,7 @@ export default class SideBar
     return wrapper;
   }
 
-  private detailsPosition(): HTMLElement {
+  private detailsPosition(element: EditorElement): HTMLElement {
     const wrapper = document.createElement("div");
     wrapper.setAttribute("container", "position-wrapper");
     const positions = this.getOptions().positionButtons ?? [];
@@ -357,7 +374,7 @@ export default class SideBar
         button.append(iconDiv);
       }
       button.onclick = () => {
-        position.action(this._parent);
+        position.action(this._parent, element.key);
       };
       wrapper.append(button);
     });
