@@ -1,4 +1,6 @@
-## Migrate from v2.x to v3.x
+---
+title: Migrate from v2.x
+---
 
 A major redesign of the library has been made on version 3, which requires some changes when moving from the previous version.
 

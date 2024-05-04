@@ -8,10 +8,16 @@ interface JEditor {
   setOptions(options: EditorOptions): void;
   mergeOptions(options: any): EditorOptions;
   getData(): EditorData[];
-  // setData(data: EditorData): void;
-  // mergeData(data: any): EditorData;
+  setData(data: EditorData[]): void;
+  hasData(key: string): boolean;
+  pushData(data: EditorData): void;
+  pullData(key: string): EditorData;
+  mergeData(key: string, data: any): EditorData;
+  getElementData(key: string): EditorData | undefined;
   setPaperSize(paperName?: string, orientation?: string): void;
   showToast(message: string, className?: string, timeout?: number);
+  setLocale(locale: string | Locale): void;
+  getDefaultLocales(): Map<string, Locale>;
 }
 
 interface EditorSection {
@@ -22,8 +28,10 @@ interface EditorSection {
 interface EditorSideBar {
   renderToolbar(): void;
   renderElementsList(): void;
+  renderCustomToolbar(): void;
   getToolbar(): HTMLElement;
   getElementsList(): HTMLElement;
+  getCustomToolbar(): HTMLElement;
   getElementsListItem(key: string): HTMLElement | undefined;
   clickElementListItem(key: string): void;
   showElementListItem(key: string): void;
@@ -69,6 +77,7 @@ interface EditorOptions {
   background?: string;
   container: string;
   customToolbarActions?: CustomToolbarAction[];
+  customToolbarClassName?: string;
   decimals?: number;
   detailProperties?: UIElement[];
   dpi?: number;
@@ -82,6 +91,7 @@ interface EditorOptions {
   paperSizes?: PaperSize[];
   positionButtons?: (UIElement & PositionButton)[];
   positionButtonsClassName?: string;
+  sidebarPosition?: "left" | "right";
   title?: string;
   toastDuration?: number;
   toolbarActions?: ToolbarAction[];
@@ -89,6 +99,9 @@ interface EditorOptions {
   zoom?: number;
   zoomIncrement?: number;
   zoomThreshold?: number;
+  onChange?: (editor: JEditor) => void;
+  onSidebarChange?: (editor: JEditor, element: EditorElement) => void;
+  onEditorChange?: (editor: JEditor, element: EditorElement) => void;
 }
 
 interface Locale {
@@ -127,6 +140,7 @@ interface ToolbarAction {
 
 interface CustomToolbarAction {
   content: string;
+  tooltip?: string;
   className?: string;
   action(editor: JEditor): void;
 }
@@ -189,7 +203,7 @@ interface AlignButton {
 }
 
 interface PositionButton {
-  action(editor: JEditor): void;
+  action(editor: JEditor, key: element): void;
 }
 
 interface IIndexable {

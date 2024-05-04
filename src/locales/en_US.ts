@@ -1,4 +1,4 @@
-const locale: Locale = {
+export const en_US: Locale = {
   zoomIn: "Zoom in",
   zoomOut: "Zoom out",
   zoomReset: "Zoom reset",
@@ -23,5 +23,3 @@ const locale: Locale = {
   alignRight: "Right",
   alignJustify: "Justify",
 } as Locale;
-
-export default locale;

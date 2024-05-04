@@ -16,7 +16,38 @@
         <div class="text-5xl -rotate-45"></div>
     </div>
     <div id="jEditor"></div>
-    <script type="module" src="./examples/index.js"></script>
+    <script type="module">
+        import { jEditor } from "src/index";
+
+        import data from "./docs/examples/defaults/data";
+        import elements from "./docs/examples/defaults/elements";
+        import customActions from "./docs/examples/defaults/custom-actions";
+
+        const editor = new jEditor(
+            {
+                container: "#jEditor",
+                paperSize: "half-letter",
+                elements: elements,
+                title: `<a href='https://github.com/medic-plus/js-document-editor'>jEditor</a>`,
+                units: "in",
+                zoomThreshold: 0.1,
+                customToolbarActions: customActions,
+                onChange: (editor) => {
+                    console.log("test onChange");
+                },
+                onSidebarChange: (editor, element) => {
+                    console.log("test onSidebarChange");
+                },
+                onEditorChange: (editor, element) => {
+                    console.log("test onEditorChange");
+                },
+            },
+            data
+        );
+        editor.showToast("Editor has been initialized<div class='text-sm'>You can now use arrow keys to move elements on the editor.</div>", "bg-primary-500", 5000);
+        window.editor = editor;
+
+    </script>
 </body>
 
 </html>

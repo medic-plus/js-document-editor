@@ -18,7 +18,8 @@ import {
   faArrowRight,
   faCircle,
 } from "@fortawesome/free-solid-svg-icons";
-import locale from "src/locales/en";
+import { en_US } from "src/locales/en_US";
+import { locales } from "src/locales/locales";
 
 export const defaultPaperSizes: PaperSize[] = [
   {
@@ -79,8 +80,6 @@ export const defaultPaperSizes: PaperSize[] = [
   },
 ];
 
-export const defaultLocale: Locale = locale;
-
 export const defaultToolbarActions: ToolbarAction[] = [
   {
     name: "toggleEditor",
@@ -119,16 +118,16 @@ export const centerPositionButtons: (UIElement & PositionButton)[] = [
     value: "vertical",
     localeText: "vertical",
     className: "text-sm",
-    action: (jEditor: JEditor): void => {
-      jEditor.getEditor().setElementCardinalPosition(null, "c", "vertical");
+    action: (jEditor: JEditor, key: string): void => {
+      jEditor.getEditor().setElementCardinalPosition(key, "c", "vertical");
     },
   },
   {
     value: "horizontal",
     localeText: "horizontal",
     className: "text-sm",
-    action: (jEditor: JEditor): void => {
-      jEditor.getEditor().setElementCardinalPosition(null, "c", "horizontal");
+    action: (jEditor: JEditor, key: string): void => {
+      jEditor.getEditor().setElementCardinalPosition(key, "c", "horizontal");
     },
   },
 ];
@@ -138,64 +137,64 @@ export const cardinalPositionButtons: (UIElement & PositionButton)[] = [
     value: "nw",
     icon: faArrowUp,
     className: "text-sm -rotate-45",
-    action: (jEditor: JEditor): void =>
-      jEditor.getEditor().setElementCardinalPosition(null, "nw"),
+    action: (jEditor: JEditor, key: string): void =>
+      jEditor.getEditor().setElementCardinalPosition(key, "nw"),
   },
   {
     value: "n",
     icon: faArrowUp,
     className: "text-sm",
-    action: (jEditor: JEditor): void =>
-      jEditor.getEditor().setElementCardinalPosition(null, "n"),
+    action: (jEditor: JEditor, key: string): void =>
+      jEditor.getEditor().setElementCardinalPosition(key, "n"),
   },
   {
     value: "ne",
     icon: faArrowUp,
     className: "text-sm rotate-45",
-    action: (jEditor: JEditor): void =>
-      jEditor.getEditor().setElementCardinalPosition(null, "ne"),
+    action: (jEditor: JEditor, key: string): void =>
+      jEditor.getEditor().setElementCardinalPosition(key, "ne"),
   },
   {
     value: "w",
     icon: faArrowLeft,
     className: "text-sm",
-    action: (jEditor: JEditor): void =>
-      jEditor.getEditor().setElementCardinalPosition(null, "w"),
+    action: (jEditor: JEditor, key: string): void =>
+      jEditor.getEditor().setElementCardinalPosition(key, "w"),
   },
   {
     value: "c",
     icon: faCircle,
     className: "text-sm",
-    action: (jEditor: JEditor): void =>
-      jEditor.getEditor().setElementCardinalPosition(null, "c"),
+    action: (jEditor: JEditor, key: string): void =>
+      jEditor.getEditor().setElementCardinalPosition(key, "c"),
   },
   {
     value: "e",
     icon: faArrowRight,
     className: "text-sm",
-    action: (jEditor: JEditor): void =>
-      jEditor.getEditor().setElementCardinalPosition(null, "e"),
+    action: (jEditor: JEditor, key: string): void =>
+      jEditor.getEditor().setElementCardinalPosition(key, "e"),
   },
   {
     value: "sw",
     icon: faArrowDown,
     className: "text-sm rotate-45",
-    action: (jEditor: JEditor): void =>
-      jEditor.getEditor().setElementCardinalPosition(null, "sw"),
+    action: (jEditor: JEditor, key: string): void =>
+      jEditor.getEditor().setElementCardinalPosition(key, "sw"),
   },
   {
     value: "s",
     icon: faArrowDown,
     className: "text-sm",
-    action: (jEditor: JEditor): void =>
-      jEditor.getEditor().setElementCardinalPosition(null, "s"),
+    action: (jEditor: JEditor, key: string): void =>
+      jEditor.getEditor().setElementCardinalPosition(key, "s"),
   },
   {
     value: "se",
     icon: faArrowDown,
     className: "text-sm -rotate-45",
-    action: (jEditor: JEditor): void =>
-      jEditor.getEditor().setElementCardinalPosition(null, "se"),
+    action: (jEditor: JEditor, key: string): void =>
+      jEditor.getEditor().setElementCardinalPosition(key, "se"),
   },
 ];
 
@@ -214,6 +213,10 @@ export const detailProperties: UIElement[] = [
 ];
 
 export const allowEventListener = ["button", "input"];
+
+export const defaultLocale: Locale = en_US;
+
+export const defaultLocales: Map<string, Locale> = locales;
 
 export const defaultEditorOptions: EditorOptions = {
   alignButtons: alignButtons,
@@ -234,8 +237,9 @@ export const defaultEditorOptions: EditorOptions = {
   positionButtonsClassName: "grid-cols-2",
   toastDuration: 3000,
   toolbarActions: defaultToolbarActions,
+  sidebarPosition: "left",
   units: "in",
   zoom: 100,
   zoomIncrement: 10,
-  zoomThreshold: 0,
+  zoomThreshold: 0.1,
 };

@@ -8,6 +8,7 @@ import {
   getPaperSize,
   moveElementToPosition,
   pixelsToUnit,
+  roundDecimals,
 } from "src/lib/utils";
 import {
   faFileArrowUp,
@@ -54,7 +55,7 @@ export default class Editor
     const container = document.querySelector(this.getOptions().container);
     container?.appendChild(section);
     this.setPaperSize(this.getOptions().paperSize);
-    this.resetZoom();
+    this.setZoom(this.getOptions().zoom ?? 100);
     this.renderBanner();
     this.renderElements();
     this.initArrowMoveListener();
@@ -122,18 +123,16 @@ export default class Editor
     const page = this.getPage();
     const paperSize = getPaperSize(this.getOptions(), paperName);
     orientation = orientation ?? this.getOptions().orientation;
-    if (page) {
-      page.className = `page ${paperSize.name} ${orientation}`;
-      this._parent.mergeOptions({ paperSize: paperSize.name, orientation });
-      console.debug("Set paper size: %s (%s)", paperSize.name, orientation);
-      this.renderBanner();
-    }
+    page.className = `page ${paperSize.name} ${orientation}`;
+    this._parent.mergeOptions({ paperSize: paperSize.name, orientation });
+    console.debug("Set paper size: %s (%s)", paperSize.name, orientation);
+    this.renderBanner();
   }
 
   setZoom(value: number) {
     const page = this.getPage();
     if (page) {
-      (page.style as any).zoom = value;
+      (page.style as any).zoom = value / 100;
       this.renderBanner();
     }
   }
@@ -142,11 +141,11 @@ export default class Editor
     const actual = this.getOptions().zoom ?? defaultOptions.zoom ?? 1;
     const increment =
       this.getOptions().zoomIncrement ?? defaultOptions.zoomIncrement ?? 1;
-    const zoom = actual + (increase ? increment : -increment);
+    const zoom = Math.trunc(actual + (increase ? increment : -increment));
     if (zoom > 0) {
-      this._parent.mergeOptions({ zoom: zoom });
-      this.setZoom(zoom / 100);
       console.debug("Zoom %s: %d%", increase ? "in" : "out", zoom);
+      this._parent.mergeOptions({ zoom: zoom });
+      this.setZoom(zoom);
     }
   }
 
@@ -161,13 +160,12 @@ export default class Editor
   resetZoom() {
     const containerWidth = this.getPageWrapper().offsetWidth;
     const pageWith = this.getPage().offsetWidth;
-    const zoom =
-      Math.round((containerWidth / pageWith) * 10) / 10 -
-      (this.getOptions().zoomThreshold ?? 0);
-    const fixedZoom = parseFloat(zoom.toFixed(2));
-    this._parent.mergeOptions({ zoom: fixedZoom * 100 });
+    const zoomThreshold = this.getOptions().zoomThreshold ?? 0;
+    const zoom = roundDecimals(containerWidth / pageWith, 2) - zoomThreshold;
+    const fixedZoom = Math.trunc(parseFloat(zoom.toFixed(2)) * 100);
+    this._parent.mergeOptions({ zoom: fixedZoom });
+    console.debug("Reset zoom: %d%", fixedZoom);
     this.setZoom(fixedZoom);
-    console.debug("Reset zoom: %d%", fixedZoom * 100);
   }
 
   renderElements() {
@@ -182,10 +180,8 @@ export default class Editor
       }
     });
     const selector = `${this.getOptions().container} .page .element`;
-    // if (editorMode) {
     this.initDraggableElements(selector, editorMode);
     this.initResizableElements(selector, editorMode);
-    // }
   }
 
   deselectActiveElement() {
@@ -229,12 +225,13 @@ export default class Editor
 
   elementTrigger(element: HTMLElement) {
     const key = element.getAttribute("data-key");
-    const data = this.getData().find((data) => data.element === key);
-    if (data) {
-      data.width = element.offsetWidth;
-      data.height = element.offsetHeight;
-      data.top = element.offsetTop;
-      data.left = element.offsetLeft;
+    if (key && this.hasData(key)) {
+      this.mergeData(key, {
+        width: element.offsetWidth,
+        height: element.offsetHeight,
+        top: element.offsetTop,
+        left: element.offsetLeft,
+      });
       console.debug("Data for %s was saved", key);
     }
   }
@@ -334,6 +331,7 @@ export default class Editor
         listeners: {
           move(event) {
             if (_this.getEditorMode()) {
+              _this.deselectActiveElement();
               event.target.classList.add("active");
               event.target.style.top = `${event.target.offsetTop + event.dy}px`;
               event.target.style.left = `${event.target.offsetLeft + event.dx}px`;

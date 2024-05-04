@@ -1,4 +1,4 @@
-const elements: EditorElement[] = [
+const elements = [
   {
     key: "date",
     text: "Date",
