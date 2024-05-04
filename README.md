@@ -21,7 +21,7 @@ The easiest way to get started is to use the Unpkg CDN in your website:
 <script
   src="https://unpkg.com/@medicplus/js-document-editor/dist/jeditor.js"
   type="module"
-/>
+></script>
 ```
 
 Using yarn:
@@ -39,6 +39,7 @@ npm install @medicplus/js-document-editor --save
 Now you are ready to use your editor, just create a `<div id="myEditor"></div>` element in your website:
 
 ```javascript
+// This is not required if you are using CDN imports
 import { jEditor } from "@medic-plus/js-document-editor/dist/jeditor";
 
 // If you are using TypeScript (npm, yarn or pnpm) you can import from src path and have type validation
@@ -83,7 +84,7 @@ A full redesign of the UI has been implemented on this new version, and a full r
 
 ## Migrating from v2.x
 
-You can find the details on the [Migration guide](https://medic-plus.github.io/js-document-editor/migrate-v2.x-v3.x.md)
+You can find the details on the [Migration guide](https://medic-plus.github.io/js-document-editor/migrate-v2.x-v3.x.html)
 
 ## License
 

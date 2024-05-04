@@ -218,6 +218,8 @@ export const defaultLocale: Locale = en_US;
 
 export const defaultLocales: Map<string, Locale> = locales;
 
+export const defaultThemes: string[] = ["default", "green", "pink", "teal"];
+
 export const defaultEditorOptions: EditorOptions = {
   alignButtons: alignButtons,
   arrowStep: 1,

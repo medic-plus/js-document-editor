@@ -15,8 +15,11 @@ plugins:
   - jekyll-feed
   - jekyll-seo-tag
 
-# header_pages:
-# - about.md
+header_pages:
+  - index.md
+  - pages/configuration.md
+  - pages/using-jeditor.md
+  - pages/examples.md
 
 repos:
   - name: medic-plus/js-document-editor

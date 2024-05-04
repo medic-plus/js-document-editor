@@ -18,6 +18,8 @@ interface JEditor {
   showToast(message: string, className?: string, timeout?: number);
   setLocale(locale: string | Locale): void;
   getDefaultLocales(): Map<string, Locale>;
+  setTheme(theme: string): void;
+  getDefaultThemes(): string[];
 }
 
 interface EditorSection {
