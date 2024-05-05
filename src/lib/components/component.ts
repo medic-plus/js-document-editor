@@ -1,7 +1,8 @@
-import { defaultLocale } from "src/lib/defaults";
+import { defaultLocale, defaultLocales } from "src/lib/defaults";
 
 export default class Component {
   _parent: JEditor;
+  _rendered: boolean = false;
 
   constructor(parent: JEditor) {
     this._parent = parent;
@@ -19,7 +20,11 @@ export default class Component {
   }
 
   getLocale(): Locale | undefined {
-    return this.getOptions().locale;
+    const locale = this.getOptions().locale;
+    if (typeof locale === "string") {
+      return defaultLocales.get(locale);
+    }
+    return locale;
   }
 
   getData(): EditorData[] {
@@ -38,12 +43,16 @@ export default class Component {
     if (!entry) {
       return "";
     }
-    let locale = this._parent.getOptions().locale;
+    let locale = this.getLocale();
     locale = locale ?? defaultLocale;
     return (locale as IIndexable)[entry] ?? entry;
   }
 
   getEditorMode(): boolean {
     return this._parent.getOptions().editorMode ?? false;
+  }
+
+  triggerParent(component: string, event: string) {
+    return this._parent.triggerChange(component, event);
   }
 }

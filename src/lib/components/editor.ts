@@ -22,20 +22,25 @@ export default class Editor
   extends Component
   implements EditorSection, EditorContainer
 {
-  private _rendered = false;
-
   constructor(parent: JEditor) {
     super(parent);
     this.render();
   }
 
   render() {
+    let section;
     if (this.getSection() || this._rendered) {
-      this.getSection().remove();
+      section = this.getSection();
+      section.innerHTML = "";
+      this._rendered = false;
+    } else {
+      // Create Container element
+      section = document.createElement("main");
+      section.setAttribute("data-container", "editor");
+      // Add to main container
+      const container = document.querySelector(this.getOptions().container);
+      container?.appendChild(section);
     }
-    // Container element
-    const section = document.createElement("main");
-    section.setAttribute("data-container", "editor");
     // Info banner
     const banner = document.createElement("div");
     banner.className = "flex justify-evenly items-center bg-primary-800 py-2";
@@ -51,14 +56,13 @@ export default class Editor
     const page = document.createElement("div");
     page.setAttribute("data-container", "page");
     pageWrapper.appendChild(page);
-    // Add to main container
-    const container = document.querySelector(this.getOptions().container);
-    container?.appendChild(section);
+    // Call sub-render and setter functions
     this.setPaperSize(this.getOptions().paperSize);
-    this.setZoom(this.getOptions().zoom ?? 100);
     this.renderBanner();
     this.renderElements();
     this.initArrowMoveListener();
+    this.setPageBackground();
+    this.resetZoom();
     this._rendered = true;
   }
 
@@ -85,6 +89,54 @@ export default class Editor
     banner.appendChild(pageOrientationDiv);
     banner.appendChild(pageSizeDiv);
     banner.appendChild(zoomDiv);
+  }
+
+  renderElements() {
+    const editorMode = this.getEditorMode();
+    this.getPage().innerHTML = "";
+    this.getData().map((data) => {
+      const elements = this.getOptions().elements;
+      const element = elements.find((element) => element.key === data.element);
+      if (element) {
+        const container = this.createElementObject(data, element, editorMode);
+        this.getPage().appendChild(container);
+      }
+    });
+    const selector = `${this.getOptions().container} .page .element`;
+    this.initDraggableElements(selector, editorMode);
+    this.initResizableElements(selector, editorMode);
+  }
+
+  private createElementObject(
+    data: EditorData,
+    element: EditorElement,
+    editorMode: boolean | undefined
+  ) {
+    const _this = this;
+    const container = document.createElement("div");
+    container.className = "element";
+    container.setAttribute("data-key", data.element);
+    container.setAttribute("data-text", element.text);
+    container.style.width = data.width + "px";
+    container.style.height = data.height + "px";
+    container.style.top = data.top + "px";
+    container.style.left = data.left + "px";
+    container.style.textAlign = data.align ?? element.align ?? "initial";
+    container.style.fontSize =
+      (data.fontSize ?? element.fontSize ?? this.getOptions().fontSize ?? 16) +
+      "px";
+    const placeholder = data.placeholder ?? element.placeholder ?? "";
+    container.innerHTML = placeholder + element.value;
+    container.onclick = () => {
+      if (_this.getEditorMode()) {
+        this.selectElement(data.element);
+        this.getSidebar().showDetails(data.element);
+      }
+    };
+    if (!editorMode) {
+      container.classList.add("rendered");
+    }
+    return container;
   }
 
   getSection(): HTMLElement {
@@ -119,20 +171,36 @@ export default class Editor
     return this.getPage().querySelector(`.element.active`) as HTMLElement;
   }
 
+  private triggerChange(event: string, key?: string) {
+    if (this.getOptions().onEditorChange && this._rendered) {
+      if (key) {
+        const data = this._parent.getElementData(key);
+        this.getOptions().onEditorChange(this._parent, event, data ?? key);
+      } else {
+        this.getOptions().onEditorChange(this._parent, event);
+      }
+      this.triggerParent("editor", event);
+    }
+  }
+
   setPaperSize(paperName?: string, orientation?: string) {
     const page = this.getPage();
-    const paperSize = getPaperSize(this.getOptions(), paperName);
-    orientation = orientation ?? this.getOptions().orientation;
-    page.className = `page ${paperSize.name} ${orientation}`;
-    this._parent.mergeOptions({ paperSize: paperSize.name, orientation });
-    console.debug("Set paper size: %s (%s)", paperSize.name, orientation);
-    this.renderBanner();
+    if (paperName || orientation) {
+      const paperSize = getPaperSize(this.getOptions(), paperName);
+      orientation = orientation ?? this.getOptions().orientation;
+      page.className = `page ${paperSize.name} ${orientation}`;
+      this._parent.mergeOptions({ paperSize: paperSize.name, orientation });
+      console.debug("Set paper size: %s (%s)", paperSize.name, orientation);
+      this.triggerChange("setPaperSize");
+      this.renderBanner();
+    }
   }
 
   setZoom(value: number) {
     const page = this.getPage();
     if (page) {
       (page.style as any).zoom = value / 100;
+      this.triggerChange("setZoom");
       this.renderBanner();
     }
   }
@@ -168,59 +236,11 @@ export default class Editor
     this.setZoom(fixedZoom);
   }
 
-  renderElements() {
-    const editorMode = this.getEditorMode();
-    this.getPage().innerHTML = "";
-    this.getData().map((data) => {
-      const elements = this.getOptions().elements;
-      const element = elements.find((element) => element.key === data.element);
-      if (element) {
-        const container = this.createElementObject(data, element, editorMode);
-        this.getPage().appendChild(container);
-      }
-    });
-    const selector = `${this.getOptions().container} .page .element`;
-    this.initDraggableElements(selector, editorMode);
-    this.initResizableElements(selector, editorMode);
-  }
-
   deselectActiveElement() {
     const active = this.getActiveElement();
     if (active) {
       active.classList.remove("active");
     }
-  }
-
-  private createElementObject(
-    data: EditorData,
-    element: EditorElement,
-    editorMode: boolean | undefined
-  ) {
-    const _this = this;
-    const container = document.createElement("div");
-    container.className = "element";
-    container.setAttribute("data-key", data.element);
-    container.setAttribute("data-text", element.text);
-    container.style.width = data.width + "px";
-    container.style.height = data.height + "px";
-    container.style.top = data.top + "px";
-    container.style.left = data.left + "px";
-    container.style.textAlign = data.align ?? element.align ?? "initial";
-    container.style.fontSize =
-      (data.fontSize ?? element.fontSize ?? this.getOptions().fontSize ?? 16) +
-      "px";
-    const placeholder = data.placeholder ?? element.placeholder ?? "";
-    container.innerHTML = placeholder + element.value;
-    container.onclick = () => {
-      if (_this.getEditorMode()) {
-        this.selectElement(data.element);
-        this.getSidebar().showDetails(data.element);
-      }
-    };
-    if (!editorMode) {
-      container.classList.add("rendered");
-    }
-    return container;
   }
 
   elementTrigger(element: HTMLElement) {
@@ -233,6 +253,7 @@ export default class Editor
         left: element.offsetLeft,
       });
       console.debug("Data for %s was saved", key);
+      this.triggerChange("elementTrigger", key);
     }
   }
 
@@ -363,29 +384,32 @@ export default class Editor
     const editorMode = editor.getOptions().editorMode;
     const focusElement = document.activeElement?.nodeName?.toLowerCase() ?? "";
     if (editorMode && element && !allowEventListener.includes(focusElement)) {
-      event.preventDefault();
       const arrowStep = editor.getOptions().arrowStep ?? 1;
       const arrowShift = editor.getOptions().arrowShiftStep ?? 5;
       const step = event.shiftKey ? arrowShift : arrowStep;
       const code = event.code;
-      let top = element.offsetTop;
-      let left = element.offsetLeft;
+      if (code.includes("Arrow")) {
+        event.preventDefault();
+        let top = element.offsetTop;
+        let left = element.offsetLeft;
 
-      switch (code) {
-        case "ArrowRight":
-          element.style.left = `${getBoundariesPosition(element, left + step)}px`;
-          break;
-        case "ArrowLeft":
-          element.style.left = `${getBoundariesPosition(element, left - step)}px`;
-          break;
-        case "ArrowUp":
-          element.style.top = `${getBoundariesPosition(element, top - step, true)}px`;
-          break;
-        case "ArrowDown":
-          element.style.top = `${getBoundariesPosition(element, top + step, true)}px`;
-          break;
+        switch (code) {
+          case "ArrowRight":
+            element.style.left = `${getBoundariesPosition(element, left + step)}px`;
+            break;
+          case "ArrowLeft":
+            element.style.left = `${getBoundariesPosition(element, left - step)}px`;
+            break;
+          case "ArrowUp":
+            element.style.top = `${getBoundariesPosition(element, top - step, true)}px`;
+            break;
+          case "ArrowDown":
+            element.style.top = `${getBoundariesPosition(element, top + step, true)}px`;
+            break;
+        }
+        editor.getSidebar().showDetails(element.getAttribute("data-key") ?? "");
+        this.elementTrigger(element);
       }
-      editor.getSidebar().showDetails(element.getAttribute("data-key") ?? "");
     }
   }
 
@@ -413,5 +437,22 @@ export default class Editor
       moveElementToPosition(element, position, value);
       this.elementTrigger(element);
     }
+  }
+
+  setPageBackground(): void {
+    const page = this.getPage();
+    const background = this.getOptions().background;
+    const isString = typeof background === "string";
+    const url = isString ? background : background?.url;
+    page.style.backgroundImage = url ? `url(${url})` : "";
+    page.style.removeProperty("background-size");
+    page.style.removeProperty("background-repeat");
+    page.style.removeProperty("background-position");
+    if (!isString) {
+      page.style.backgroundSize = background?.size ?? "initial";
+      page.style.backgroundRepeat = background?.repeat ?? "initial";
+      page.style.backgroundPosition = background?.position ?? "initial";
+    }
+    this.triggerChange("setPageBackground");
   }
 }

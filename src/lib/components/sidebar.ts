@@ -13,12 +13,19 @@ export default class SideBar
   }
 
   render() {
-    if (this.getSection()) {
-      this.getSection().remove();
+    let sidebar;
+    if (this.getSection() || this._rendered) {
+      sidebar = this.getSection();
+      sidebar.innerHTML = "";
+      this._rendered = false;
+    } else {
+      // Create Sidebar element
+      sidebar = document.createElement("aside");
+      sidebar.setAttribute("data-container", "sidebar");
+      // Add to main container
+      const container = document.querySelector(this.getOptions().container);
+      container?.appendChild(sidebar);
     }
-    // Sidebar element
-    const sidebar = document.createElement("aside");
-    sidebar.setAttribute("data-container", "sidebar");
     // Editor title
     const title = document.createElement("h1");
     title.className = `text-xl font-bold py-3 bg-primary-700 w-full text-center`;
@@ -39,12 +46,11 @@ export default class SideBar
     toolbar.setAttribute("data-container", "toolbar");
     toolbar.className = "bottom-0 flex flex-row gap-1 p-1";
     sidebar.appendChild(toolbar);
-    // Add to main container
-    const container = document.querySelector(this.getOptions().container);
-    container?.appendChild(sidebar);
+    // Call sub-render functions
     this.renderElementsList();
     this.renderCustomToolbar();
     this.renderToolbar();
+    this._rendered = true;
   }
 
   renderCustomToolbar() {
@@ -154,6 +160,18 @@ export default class SideBar
     ) as HTMLElement;
   }
 
+  private triggerChange(event: string, key?: string) {
+    if (this.getOptions().onSidebarChange && this._rendered) {
+      if (key) {
+        const data = this._parent.getElementData(key);
+        this.getOptions().onSidebarChange(this._parent, event, data ?? key);
+      } else {
+        this.getOptions().onSidebarChange(this._parent, event);
+      }
+      this.triggerParent("sidebar", event);
+    }
+  }
+
   clickElementListItem(key: string): void {
     if (!this.hasData(key)) {
       this.showElementListItem(key);
@@ -180,6 +198,7 @@ export default class SideBar
         this.getEditor().renderElements();
         this.renderElementsList();
         this.clickElementListItem(key);
+        this.triggerChange("showElementListItem", key);
       }
     }
   }
@@ -189,10 +208,12 @@ export default class SideBar
       this._parent.pullData(key);
       this.getEditor().renderElements();
       this.renderElementsList();
+      this.triggerChange("hideElementListItem", key);
     }
   }
 
   toolbarAction(action: string) {
+    this.triggerChange(action);
     switch (action) {
       case "toggleEditor":
         this._parent.mergeOptions({
@@ -297,6 +318,7 @@ export default class SideBar
         this.mergeData(element.key, { align: align.value });
         this.getEditor().renderElements();
         this.getEditor().selectElement(element.key);
+        this.triggerChange("align", element.key);
       };
       button.append(
         this.createTooltipElement(this.getLocalizedText(align.localeText))
@@ -320,6 +342,7 @@ export default class SideBar
       parent.mergeData(element.key, { fontSize: event.target.value * 1 });
       parent.renderElements();
       parent.getEditor().selectElement(element.key);
+      this.triggerChange("fontSize", element.key);
     };
     const fontSize =
       data?.fontSize ?? element.fontSize ?? this.getOptions().fontSize;
@@ -342,9 +365,13 @@ export default class SideBar
     wrapper.setAttribute("container", "placeholder-wrapper");
     const input = document.createElement("input");
     const placeholderChange = (event: any) => {
-      parent.mergeData(element.key, { placeholder: event.target.value });
-      parent.renderElements();
-      parent.getEditor().selectElement(element.key);
+      const data = parent.getElementData(element.key);
+      if (data?.placeholder !== event.target.value) {
+        parent.mergeData(element.key, { placeholder: event.target.value });
+        parent.renderElements();
+        parent.getEditor().selectElement(element.key);
+        this.triggerChange("placeholder", element.key);
+      }
     };
     input.value = data?.placeholder ?? element.placeholder ?? "";
     input.type = "text";
@@ -375,6 +402,7 @@ export default class SideBar
       }
       button.onclick = () => {
         position.action(this._parent, element.key);
+        this.triggerChange("position", element.key);
       };
       wrapper.append(button);
     });

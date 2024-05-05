@@ -1,4 +1,4 @@
-const data = [
+export const data = [
   {
     element: "title",
     width: 600,
@@ -55,5 +55,3 @@ const data = [
     align: "center",
   },
 ];
-
-export default data;

@@ -1,6 +1,7 @@
 interface JEditor {
   render(): void;
   renderElements(): void;
+  triggerChange(component: string, event: string): void;
   getSidebar(): EditorSideBar & EditorSection;
   getEditor(): EditorContainer & EditorSection;
   getToasts(): EditorToasts & EditorSection;
@@ -15,8 +16,8 @@ interface JEditor {
   mergeData(key: string, data: any): EditorData;
   getElementData(key: string): EditorData | undefined;
   setPaperSize(paperName?: string, orientation?: string): void;
-  showToast(message: string, className?: string, timeout?: number);
-  setLocale(locale: string | Locale): void;
+  showToast(message: string, className?: string, timeout?: number): void;
+  setLocale(locale: Locale | string): void;
   getDefaultLocales(): Map<string, Locale>;
   setTheme(theme: string): void;
   getDefaultThemes(): string[];
@@ -45,6 +46,7 @@ interface EditorSideBar {
 
 interface EditorContainer {
   renderBanner(): void;
+  renderElements(): void;
   getBanner(): HTMLElement;
   getPageWrapper(): HTMLElement;
   getPage(): HTMLElement;
@@ -54,7 +56,6 @@ interface EditorContainer {
   zoomIn(): void;
   zoomOut(): void;
   resetZoom(): void;
-  renderElements(): void;
   deselectActiveElement(): void;
   initResizableElements(selector: string, editorMode: boolean): void;
   initDraggableElements(selector: string, editorMode: boolean): void;
@@ -66,6 +67,7 @@ interface EditorContainer {
     position: string,
     value?: string
   ): void;
+  setPageBackground(): void;
 }
 
 interface EditorToasts {
@@ -76,7 +78,7 @@ interface EditorOptions {
   alignButtons?: (UIElement & AlignButton)[];
   arrowStep?: number;
   arrowShiftStep?: number;
-  background?: string;
+  background?: string | Background;
   container: string;
   customToolbarActions?: CustomToolbarAction[];
   customToolbarClassName?: string;
@@ -87,7 +89,7 @@ interface EditorOptions {
   editorMode?: boolean;
   elements: EditorElement[];
   fontSize?: number;
-  locale?: Locale;
+  locale?: Locale | string;
   orientation?: string;
   paperSize?: string;
   paperSizes?: PaperSize[];
@@ -102,9 +104,17 @@ interface EditorOptions {
   zoom?: number;
   zoomIncrement?: number;
   zoomThreshold?: number;
-  onChange?: (editor: JEditor) => void;
-  onSidebarChange?: (editor: JEditor, element: EditorElement) => void;
-  onEditorChange?: (editor: JEditor, element: EditorElement) => void;
+  onChange: (editor: JEditor, component: string, event: string) => void | null;
+  onSidebarChange: (
+    editor: JEditor,
+    event: string,
+    data?: EditorData | string
+  ) => void | null;
+  onEditorChange: (
+    editor: JEditor,
+    event: string,
+    data?: EditorData | string
+  ) => void | null;
 }
 
 interface Locale {
@@ -192,6 +202,13 @@ interface ElementDetails {
   height: string;
   top: string;
   left: string;
+}
+
+interface Background {
+  url: string;
+  size?: string;
+  repeat?: string;
+  position?: string;
 }
 
 interface UIElement {

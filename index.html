@@ -15,13 +15,14 @@
         <div class="text-3xl rotate-45"></div>
         <div class="text-5xl -rotate-45"></div>
     </div>
+    <input type="file" accept="image/*" id="inputBackground" style="display:none">
     <div id="jEditor"></div>
     <script type="module">
         import { jEditor } from "src/index";
 
-        import data from "./docs/examples/defaults/data.js";
-        import elements from "./docs/examples/defaults/elements.js";
-        import customActions from "./docs/examples/defaults/custom-actions.js";
+        import { data } from "./docs/examples/defaults/data.js";
+        import { elements } from "./docs/examples/defaults/elements.js";
+        import { customActions, unsavedChanges } from "./docs/examples/defaults/custom-actions.js";
 
         const editor = new jEditor(
             {
@@ -33,20 +34,22 @@
                 zoomThreshold: 0.1,
                 customToolbarActions: customActions,
                 onChange: (editor) => {
-                    console.log("test onChange");
+                    const action = customActions.find((c) => c.content === "Save");
+                    action.className = "text-sm bg-primary-500";
+                    editor.getSidebar().renderCustomToolbar();
+                    window.addEventListener("beforeunload", unsavedChanges);
                 },
-                onSidebarChange: (editor, element) => {
-                    console.log("test onSidebarChange");
+                onSidebarChange: (editor, event, data) => {
+                    console.info("onSidebarChange", event, data);
                 },
-                onEditorChange: (editor, element) => {
-                    console.log("test onEditorChange");
+                onEditorChange: (editor, event, data) => {
+                    console.info("onEditorChange", event, data);
                 },
             },
-            data
+            [...data]
         );
         editor.showToast("Editor has been initialized<div class='text-sm'>You can now use arrow keys to move elements on the editor.</div>", "bg-primary-500", 5000);
         window.editor = editor;
-
     </script>
 </body>
 

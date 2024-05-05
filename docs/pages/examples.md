@@ -44,3 +44,7 @@ In this live demo you can change the editor locale (UI and elements) to any of t
 - [Example code](https://github.com/medic-plus/js-document-editor/blob/main/docs/examples/localized/index.html)
 
 ![Localized jEditor demo](../images/localized.png "Localized jEditor demo")
+
+### Generate PDF
+
+TODO: WIP

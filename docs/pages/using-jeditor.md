@@ -2,10 +2,36 @@
 title: Using JEditor
 ---
 
-jEditor is packaged with some of the most essential functions that can help you interact directly with the elements, data and options
+## Basic Usage
 
-### jEditor functions
+After you initialized jEditor with the [default options](./configuration.md) you can start calling your editor to get or set values and configurations.
 
-#### Sidebar functions
+- [Creating the elements](#setting-elements)
+- [Working with elements values](#getting-and-setting-elements-values)
+- [Define a custom toolbar](#custom-toolbar)
+- [Change the page background](#changing-the-background)
+- [How to use the listeners?](#listeners)
 
-#### Editor functions
+### Setting elements
+
+TODO: WIP
+
+### Getting and setting elements values
+
+TODO: WIP
+
+### Custom toolbar
+
+TODO: WIP
+
+### Changing the background
+
+TODO: WIP
+
+### Listeners
+
+TODO: WIP
+
+## Advanced Usage
+
+You can call the editor functions directly and make your own custom behavior, see [Advanced Usage](./advanced-usage.md)

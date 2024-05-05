@@ -12,18 +12,23 @@ export default class Toasts
   }
 
   render() {
-    if (this.getSection()) {
-      this.getSection().remove();
+    let toasts;
+    if (this.getSection() || this._rendered) {
+      toasts = this.getSection();
+      toasts.innerHTML = "";
+      this._rendered = false;
+    } else {
+      // Create Toasts container
+      toasts = document.createElement("div");
+      toasts.setAttribute("data-container", "toasts");
+      // Add to main container
+      const container = document.querySelector(this.getOptions().container);
+      container?.appendChild(toasts);
     }
-    // Toasts container
-    const toasts = document.createElement("div");
     const sidebarPosition = this._parent.getOptions().sidebarPosition;
     const classPosition = sidebarPosition === "left" ? "right-0" : "left-0";
     toasts.className = `fixed top-14 ${classPosition} px-3 py-2 z-50 flex flex-col gap-2 justify-around`;
-    toasts.setAttribute("data-container", "toasts");
-    // Add to main container
-    const container = document.querySelector(this.getOptions().container);
-    container?.appendChild(toasts);
+    this._rendered = true;
   }
 
   getSection(): HTMLElement {

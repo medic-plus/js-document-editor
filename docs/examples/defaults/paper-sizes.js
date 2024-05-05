@@ -1,7 +1,7 @@
-const paperSizes = [
+export const paperSizes = [
   {
     name: "letter",
-    displayName: "Carta",
+    displayName: "Letter",
     description: "21.6cm x 27.9cm",
     width: 1275,
     height: 1650,
@@ -9,7 +9,7 @@ const paperSizes = [
   },
   {
     name: "half-letter",
-    displayName: "Media carta",
+    displayName: "Half Letter",
     description: "21.6cm x 14.0cm",
     width: 1275,
     height: 825,
@@ -32,5 +32,3 @@ const paperSizes = [
     default: false,
   },
 ];
-
-export default paperSizes;

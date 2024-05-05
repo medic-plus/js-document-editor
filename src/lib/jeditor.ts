@@ -24,7 +24,12 @@ export class jEditor implements JEditor {
     this._sidebar = new SideBar(this);
     this._toasts = new Toasts(this);
     this._editor = new Editor(this);
-    this._editor.resetZoom();
+  }
+
+  triggerChange(component: string, event: string) {
+    if (this.getOptions().onChange && this._rendered) {
+      return this.getOptions().onChange(this, component, event);
+    }
   }
 
   render(): void {
@@ -39,6 +44,7 @@ export class jEditor implements JEditor {
     container.setAttribute("data-container", "jeditor");
     container.setAttribute("data-theme", this._options.theme ?? "default");
     if (this._rendered) {
+      this._rendered = false;
       container.innerHTML = "";
       this._sidebar = new SideBar(this);
       this._editor = new Editor(this);
@@ -147,7 +153,7 @@ export class jEditor implements JEditor {
     this._editor.setZoom(value);
   }
 
-  setLocale(locale: string | Locale) {
+  setLocale(locale: Locale | string) {
     const newLocale =
       typeof locale === "string" ? defaultLocales.get(locale) : locale;
     if (!newLocale) {

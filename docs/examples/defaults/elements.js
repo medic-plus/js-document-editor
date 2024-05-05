@@ -1,4 +1,4 @@
-const elements = [
+export const elements = [
   {
     key: "date",
     text: "Date",
@@ -65,5 +65,3 @@ const elements = [
     settings: { placeholder: false },
   },
 ];
-
-export default elements;

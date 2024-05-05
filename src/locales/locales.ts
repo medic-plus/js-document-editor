@@ -3,7 +3,7 @@ import { en_US } from "./en_US";
 import { es_ES } from "./es_ES";
 import { fr_FR } from "./fr_FR";
 import { it_IT } from "./it_IT";
-import { zh_CN } from "./zh-cn";
+import { zh_CN } from "./zh_CN";
 
 export const locales: Map<string, Locale> = new Map<string, Locale>([
   ["de_DE", de_DE],

@@ -65,11 +65,9 @@ const localeData = [
   },
 ];
 
-const customActions = localeData.map((data) => ({
+export const customActions = localeData.map((data) => ({
   action: (editor) => changeLocale(editor, data),
   content: data.label,
   className: `text-sm ${data.label === "EN" ? "bg-primary-500" : ""}`,
   tooltip: data.tooltip,
 }));
-
-export default customActions;
