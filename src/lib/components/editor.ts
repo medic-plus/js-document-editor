@@ -1,5 +1,6 @@
 import interact from "interactjs";
 import {
+  EDITOR_VALUES,
   allowEventListener,
   defaultEditorOptions as defaultOptions,
 } from "src/lib/defaults";
@@ -73,11 +74,13 @@ export default class Editor
     // Page size
     const pageSizeDiv = document.createElement("div");
     const paper = getPaperSize(options, options.paperSize);
-    const paperName = paper.displayName ?? paper.name;
-    const description = paper.description
-      ? `<span class="hidden md:flex">(${paper.description})</span>`
-      : "";
-    pageSizeDiv.innerHTML = `${icon(faRulerCombined).html.toString()} ${paperName} ${description}`;
+    pageSizeDiv.innerHTML = `${icon(faRulerCombined).html.toString()} ${paper.displayName}`;
+    if (paper.description) {
+      const description = document.createElement("span");
+      description.innerHTML = `(${paper.description})`;
+      description.className = "hidden md:flex";
+      pageSizeDiv.appendChild(description);
+    }
     // Page orientation
     const pageOrientationDiv = document.createElement("div");
     const orientation = this.getOptions().orientation ?? "portrait";
@@ -122,9 +125,12 @@ export default class Editor
     container.style.top = data.top + "px";
     container.style.left = data.left + "px";
     container.style.textAlign = data.align ?? element.align ?? "initial";
-    container.style.fontSize =
-      (data.fontSize ?? element.fontSize ?? this.getOptions().fontSize ?? 16) +
-      "px";
+    container.style.fontSize = `${
+      data.fontSize ??
+      element.fontSize ??
+      this.getOptions().fontSize ??
+      EDITOR_VALUES.fontSize
+    }px`;
     const placeholder = data.placeholder ?? element.placeholder ?? "";
     container.innerHTML = placeholder + element.value;
     container.onclick = () => {
@@ -185,9 +191,15 @@ export default class Editor
 
   setPaperSize(paperName?: string, orientation?: string) {
     const page = this.getPage();
+    const options = this.getOptions();
     if (paperName || orientation) {
-      const paperSize = getPaperSize(this.getOptions(), paperName);
-      orientation = orientation ?? this.getOptions().orientation;
+      const paperSize = getPaperSize(options, paperName);
+      const customOrientation =
+        options.forceOrientation && paperSize.orientation
+          ? paperSize.orientation
+          : options.orientation;
+      orientation =
+        orientation ?? customOrientation ?? EDITOR_VALUES.orientation;
       page.className = `page ${paperSize.name} ${orientation}`;
       this._parent.mergeOptions({ paperSize: paperSize.name, orientation });
       console.debug("Set paper size: %s (%s)", paperSize.name, orientation);

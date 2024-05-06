@@ -2,7 +2,7 @@
 
 import { data } from "./defaults/data.js";
 import { elements } from "./defaults/elements.js";
-import { customActions } from "./defaults/custom-actions.js";
+import { customActions, unsavedChanges } from "./defaults/custom-actions.js";
 
 const editor = new jEditor(
   {

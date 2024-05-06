@@ -4,7 +4,7 @@
 
 jEditor (js-document-editor) is a simple and extensible JavaScript document editor, which allows you to define a document and then drag and resize elements.
 
-Then you can get the position and configuration values from all the elements on the document and generate it as a PDF (using an external library like `html2Canvas` and `jsPDF`).
+Then you can get the position and configuration values from all the elements on the document and generate it as a PDF (using external libraries like `html2Canvas` and `jsPDF`).
 
 ![A simple and extensible JavaScript document editor](./docs/images/main.png "jEditor")
 
@@ -40,10 +40,7 @@ Now you are ready to use your editor, just create a `<div id="myEditor"></div>` 
 
 ```javascript
 // This is not required if you are using CDN imports
-import { jEditor } from "@medic-plus/js-document-editor/dist/jeditor";
-
-// If you are using TypeScript (npm, yarn or pnpm) you can import from src path and have type validation
-import { jEditor } from "@medic-plus/js-document-editor/src/index";
+import { jEditor } from "@medic-plus/js-document-editor";
 
 // Let's define a simple element
 const elements = [{

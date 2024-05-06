@@ -45,6 +45,12 @@ In this live demo you can change the editor locale (UI and elements) to any of t
 
 ![Localized jEditor demo](../images/localized.png "Localized jEditor demo")
 
-### Generate PDF
+### [Generate PDF](../examples/pdf/index.html)
 
-TODO: WIP
+Here you can see an example of how to generate a PDF file based on the values from the editor using the libraries `html2canvas` and `jsPDF`
+
+- [Example code](https://github.com/medic-plus/js-document-editor/blob/main/docs/examples/pdf/index.html)
+- [html2canvas](https://github.com/niklasvh/html2canvas)
+- [jsPDF](https://github.com/parallax/jsPDF)
+
+![PDF jEditor demo](../images/pdf.png "PDF jEditor demo")
