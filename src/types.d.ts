@@ -89,8 +89,9 @@ interface EditorOptions {
   editorMode?: boolean;
   elements: EditorElement[];
   fontSize?: number;
+  forceOrientation?: boolean;
   locale?: Locale | string;
-  orientation?: string;
+  orientation?: "portrait" | "landscape";
   paperSize?: string;
   paperSizes?: PaperSize[];
   positionButtons?: (UIElement & PositionButton)[];
@@ -160,11 +161,12 @@ interface CustomToolbarAction {
 
 interface PaperSize {
   name: string;
-  displayName?: string;
+  displayName: string;
   description?: string;
+  orientation: "portrait" | "landscape";
   width: number;
   height: number;
-  default: boolean;
+  default?: boolean;
 }
 
 interface EditorElement {

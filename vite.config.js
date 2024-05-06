@@ -2,9 +2,20 @@ import { defineConfig } from "vite";
 import { resolve } from "path";
 import typescript from "@rollup/plugin-typescript";
 import { typescriptPaths } from "rollup-plugin-typescript-paths";
+import { viteStaticCopy } from "vite-plugin-static-copy";
 
 export default defineConfig({
-  plugins: [],
+  plugins: [
+    viteStaticCopy({
+      targets: [
+        {
+          src: "src/types.d.ts",
+          rename: "index.d.ts",
+          dest: ".",
+        },
+      ],
+    }),
+  ],
   resolve: {
     alias: {
       src: resolve(__dirname, "./src"),
@@ -21,7 +32,7 @@ export default defineConfig({
       entry: resolve(__dirname, "src/index.ts"),
       name: "jeditor",
       fileName: "jeditor",
-      formats: ["es"],
+      formats: ["es", "cjs"],
     },
     target: "esnext",
     rollupOptions: {

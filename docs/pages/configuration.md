@@ -51,8 +51,9 @@ You can check all the interface types definition on [`types.d.ts`](https://githu
 | editorMode: `boolean`                             | true                                                                  | Enables editing mode to modify, resize and drag elements.                             |
 | elements: `EditorElement[]`                       | **required**                                                          | An array of initial elements to be displayed in the editor.                           |
 | fontSize: `number`                                | 16                                                                    | The default font size for elements in `pixels`.                                       |
+| forceOrientation: `boolean`                       | false                                                                 | Change to paper `orientation` on paper size change                                    |
 | locale: `Locale` \| 'string'                      | 'en_US'                                                               | The locale object defining language formatting.                                       |
-| orientation: `string`                             | 'portrait'                                                            | The initial paper orientation (`portrait` or `landscape`).                            |
+| orientation: `"portrait"` \| `"landscape"`        | 'portrait'                                                            | The initial paper orientation.                                                        |
 | paperSize: `string`                               | 'letter'                                                              | The initial paper size (e.g., `letter`, `A4`).                                        |
 | paperSizes: `PaperSize[]`                         | [`defaultPaperSizes`](#default-paper-sizes)                           | An array of custom paper sizes to be displayed in the paper size dropdown.            |
 | positionButtons: `(UIElement & PositionButton)[]` | [`centerPositionButtons`](#default-position-buttons)                  | An array of custom position buttons to be displayed in the toolbar.                   |
@@ -194,6 +195,7 @@ export const defaultPaperSizes: PaperSize[] = [
     name: "letter",
     displayName: "Letter",
     description: "8.5in x 11in",
+    orientation: "portrait",
     width: 1275,
     height: 1650,
     default: true,
@@ -201,50 +203,50 @@ export const defaultPaperSizes: PaperSize[] = [
   {
     name: "half-letter",
     displayName: "Half Letter",
-    description: "8.5in x 5.5in",
-    width: 1275,
-    height: 825,
-    default: false,
+    description: "5.5in x 8.5in",
+    orientation: "portrait",
+    width: 825,
+    height: 1275,
   },
   {
     name: "legal",
     displayName: "Legal",
     description: "8.5in x 14in",
+    orientation: "portrait",
     width: 1275,
     height: 2100,
-    default: false,
   },
   {
     name: "tabloid",
     displayName: "Tabloid",
     description: "11in x 17in",
+    orientation: "portrait",
     width: 1650,
     height: 2550,
-    default: false,
   },
   {
     name: "a3",
     displayName: "A3",
     description: "11.7in x 16.5in",
+    orientation: "portrait",
     width: 1754,
     height: 2480,
-    default: false,
   },
   {
     name: "a4",
     displayName: "A4",
     description: "8.3in x 11.7in",
+    orientation: "portrait",
     width: 1240,
     height: 1754,
-    default: false,
   },
   {
     name: "a5",
     displayName: "A5",
     description: "5.8in x 8.3in",
+    orientation: "portrait",
     width: 874,
     height: 1240,
-    default: false,
   },
 ];
 ```

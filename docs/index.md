@@ -43,10 +43,7 @@ Now you are ready to use your editor, just create a `<div id="myEditor"></div>` 
 
 ```javascript
 // This is not required if you are using CDN imports
-import { jEditor } from "@medic-plus/js-document-editor/dist/jeditor";
-
-// If you are using TypeScript (npm, yarn or pnpm) you can import from src path and have type validation
-import { jEditor } from "@medic-plus/js-document-editor/src/index";
+import { jEditor } from "@medic-plus/js-document-editor";
 
 // Let's define a simple element
 const elements = [{
