@@ -32,7 +32,7 @@ Now with jEditor v3.x, you can initialize multiple instances on the same site, a
 // <div id="myEditor"></div>
 
 // FontAwesome is not required
-import { jEditor } from "@medic-plus/js-document-editor/dist/jeditor";
+import { jEditor } from "@medic-plus/js-document-editor";
 
 const options = { container: "#myEditor", elements: [], units: "in" };
 const data = [];
@@ -61,7 +61,7 @@ Some of the options have been renamed or have changed significally, here are the
 | `extraFunctions`   | Array: []            | `customToolbarActions` | CustomToolbarActions[]:undefined |                                                                      |
 | `helper`           | Boolean: true        | `detailProperties`     | UIElement[]:DEFAULT_PROPERTIES   | `width`, `height`, `top` and `left`, can be disabled by setting `[]` |
 | `locale`           | Array: [...]         | `locale`               | Locale:ENGLISH_LOCALE            |                                                                      |
-| `paperSize`        | String: "a4"         | `paperSize`            | String:undefined                 | Sets first paperSize if none set                                     |
+| `paperSize`        | String: "a4"         | `paperSize`            | String:'letter'                  | Sets first paperSize if none set                                     |
 | `paperSizes`       | Array: [...]         | `paperSizes`           | PaperSize[]:DEFAULT_PAPER_SIZES  | `letter`, `half-letter`, `legal`, `tabloid`, `A3`, `A4` and `A5`     |
 | `rendered`         | Boolean: false       | `editorMode`           | Boolean:true                     |                                                                      |
 | `saveButton`       | Boolean: false       | \-                     | \-                               | Removed, functionality can be recovered using `onChange`             |

@@ -12,6 +12,8 @@ You can extend and change some of the behavior of the editor
 
 You can change any of the options when defining the editor or using the `setOptions` and `mergeOptions` functions.
 
+> **_IMPORTANT:_** It is NOT recommended to change the options directly as it can cause conflicts with the editor, for example `myEditor.getOptions()[0].paperSize = 'a5';`
+
 ```typescript
 // Send options on initalization
 const myOptions = {
@@ -30,7 +32,7 @@ myEditor.setOptions(myOtherOptions);
 
 // This will merge the existing values from `myOptions`
 // and override them only if they exist in `myOtherOptions`
-myEditor.setOptions(myOtherOptions);
+myEditor.mergeOptions(myOtherOptions);
 ```
 
 You can check all the interface types definition on [`types.d.ts`](https://github.com/medic-plus/js-document-editor/blob/main/src/types.d.ts)

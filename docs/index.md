@@ -54,7 +54,8 @@ const elements = [{
     height: 20;
 }];
 
-// Now let's add it to the page, you can also set an empty array and use the UI to manipulate the elements
+// Now let's add it to the page, you can also set an empty array
+// and use the UI to manipulate the elements
 const data = [{
   element: "my-element";
   left: 100;

@@ -242,6 +242,7 @@ export const defaultEditorOptions: EditorOptions = {
   forceOrientation: false,
   locale: "en_US",
   orientation: EDITOR_VALUES.orientation,
+  paperSize: "letter",
   paperSizes: defaultPaperSizes,
   positionButtons: centerPositionButtons,
   positionButtonsClassName: "grid-cols-2",
@@ -256,4 +257,5 @@ export const defaultEditorOptions: EditorOptions = {
   onChange: () => {},
   onEditorChange: () => {},
   onSidebarChange: () => {},
+  onElementChange: () => {},
 };

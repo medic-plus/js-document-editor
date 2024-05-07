@@ -46,6 +46,9 @@
                 onEditorChange: (editor, event, data) => {
                     console.info("onEditorChange", event, data);
                 },
+                onElementChange: (editor, event, data) => {
+                    console.info("onElementChange", event, data);
+                },
             },
             [...data]
         );

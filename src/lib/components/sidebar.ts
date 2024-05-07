@@ -124,8 +124,12 @@ export default class SideBar
   }
 
   private createTooltipElement(content: string): HTMLElement {
+    const options = this.getOptions();
     const tooltip = document.createElement("span");
-    tooltip.className = `group-hover:visible rounded shadow-lg p-2 bg-neutral-400 text-white -mt-10 invisible absolute z-50`;
+    tooltip.className = `group-hover:visible rounded shadow-lg p-2 bg-neutral-400 text-white -mt-10 invisible min-w-max absolute z-50`;
+    if (options.sidebarPosition === "right") {
+      tooltip.classList.add("-translate-x-full", "-ml-5");
+    }
     tooltip.innerHTML = content;
     return tooltip;
   }
@@ -165,6 +169,7 @@ export default class SideBar
       if (key) {
         const data = this._parent.getElementData(key);
         this.getOptions().onSidebarChange(this._parent, event, data ?? key);
+        this.getOptions().onElementChange(this._parent, event, data ?? key);
       } else {
         this.getOptions().onSidebarChange(this._parent, event);
       }
