@@ -8,6 +8,7 @@ const editor = new jEditor(
   {
     container: "#jEditor",
     paperSize: "half-letter",
+    orientation: "landscape",
     elements: elements,
     title: `<a href='https://github.com/medic-plus/js-document-editor'>jEditor</a>`,
     units: "in",
@@ -20,7 +21,9 @@ const editor = new jEditor(
       window.addEventListener("beforeunload", unsavedChanges);
     },
   },
-  data
+  // "Reset Elements" button needs the `data` variable to get cloned (spread operator)
+  // so the original array is not modified
+  [...data]
 );
 editor.showToast("Editor has been initialized");
 window.editor = editor;

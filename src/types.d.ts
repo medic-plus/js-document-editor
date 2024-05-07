@@ -116,6 +116,11 @@ interface EditorOptions {
     event: string,
     data?: EditorData | string
   ) => void | null;
+  onElementChange: (
+    editor: JEditor,
+    event: string,
+    data: EditorData | string
+  ) => void | null;
 }
 
 interface Locale {
@@ -225,7 +230,7 @@ interface AlignButton {
 }
 
 interface PositionButton {
-  action(editor: JEditor, key: element): void;
+  action(editor: JEditor, key: string): void;
 }
 
 interface IIndexable {

@@ -182,6 +182,7 @@ export default class Editor
       if (key) {
         const data = this._parent.getElementData(key);
         this.getOptions().onEditorChange(this._parent, event, data ?? key);
+        this.getOptions().onElementChange(this._parent, event, data ?? key);
       } else {
         this.getOptions().onEditorChange(this._parent, event);
       }
