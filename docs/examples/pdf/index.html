@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>jEditor PDF</title>
+    <link type="text/css" rel="stylesheet"
+        href="https://unpkg.com/@medicplus/js-document-editor@latest/dist/jeditor.css" />
+</head>
+
+<body>
+    <div id="page"></div>
+    <!-- jEditor javascript file is not needed -->
+    <!-- <script src="https://unpkg.com/@medicplus/js-document-editor@latest/dist/jeditor.js" type="module"></script> -->
+    <script type="module" src="./index.js"></script>
+
+    <!-- These two libraries are required to create the PDF from HTML code -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://unpkg.com/jspdf@latest/dist/jspdf.umd.min.js"></script>
+
+</body>
+
+</html>

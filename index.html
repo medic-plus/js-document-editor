@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>jEditor</title>
+</head>
+
+<body>
+    <div class="hidden">
+        <!-- Styles needed here as they are dynamic and are not loaded by vite  -->
+        <div class="text-3xl rotate-45"></div>
+        <div class="text-5xl -rotate-45"></div>
+    </div>
+    <input type="file" accept="image/*" id="inputBackground" style="display:none">
+    <div id="jEditor"></div>
+    <script type="module">
+        import { jEditor } from "src/index";
+
+        import { data } from "./docs/examples/defaults/data.js";
+        import { elements } from "./docs/examples/defaults/elements.js";
+        import { customActions, unsavedChanges } from "./docs/examples/defaults/custom-actions.js";
+
+        const editor = new jEditor(
+            {
+                container: "#jEditor",
+                paperSize: "half-letter",
+                orientation: "landscape",
+                elements: elements,
+                title: `<a href='https://github.com/medic-plus/js-document-editor'>jEditor</a>`,
+                units: "in",
+                zoomThreshold: 0.1,
+                customToolbarActions: customActions,
+                onChange: (editor) => {
+                    const action = customActions.find((c) => c.content === "Save");
+                    action.className = "text-sm bg-primary-500";
+                    editor.getSidebar().renderCustomToolbar();
+                    window.addEventListener("beforeunload", unsavedChanges);
+                },
+                onSidebarChange: (editor, event, data) => {
+                    console.info("onSidebarChange", event, data);
+                },
+                onEditorChange: (editor, event, data) => {
+                    console.info("onEditorChange", event, data);
+                },
+                onElementChange: (editor, event, data) => {
+                    console.info("onElementChange", event, data);
+                },
+            },
+            [...data]
+        );
+        editor.showToast("Editor has been initialized<div class='text-sm'>You can now use arrow keys to move elements on the editor.</div>", "bg-primary-500", 5000);
+        window.editor = editor;
+    </script>
+</body>
+
+</html>

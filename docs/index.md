@@ -1,4 +1,7 @@
-# jEditor (js-document-editor)
+---
+permalink: /
+title: Introduction
+---
 
 ## What is jEditor?
 
@@ -6,7 +9,7 @@ jEditor (js-document-editor) is a simple and extensible JavaScript document edit
 
 Then you can get the position and configuration values from all the elements on the document and generate it as a PDF (using external libraries like `html2Canvas` and `jsPDF`).
 
-![A simple and extensible JavaScript document editor](./docs/images/main.png "jEditor")
+![A simple and extensible JavaScript document editor](./images/main.png "jEditor")
 
 ## Getting started
 
@@ -51,7 +54,8 @@ const elements = [{
     height: 20;
 }];
 
-// Now let's add it to the page, you can also set an empty array and use the UI to manipulate the elements
+// Now let's add it to the page, you can also set an empty array
+// and use the UI to manipulate the elements
 const data = [{
   element: "my-element";
   left: 100;
@@ -67,7 +71,10 @@ const myEditor = new jEditor(options, data);
 
 ## Documentation
 
-You can check our [GitHub pages site](https://medic-plus.github.io/js-document-editor/) with the full options and functions list and some examples on what you can do
+You can get more details on how to change and extend the default configuration and functions for the editor:
+
+- [How to use?](./pages/using-jeditor.md)
+- [Configuration](./pages/configuration.md)
 
 ## What's new on v3.x?
 
@@ -81,8 +88,4 @@ A full redesign of the UI has been implemented on this new version, and a full r
 
 ## Migrating from v2.x
 
-You can find the details on the [Migration guide](https://medic-plus.github.io/js-document-editor/migrate-v2.x-v3.x.html)
-
-## License
-
-jEditor is release under the MIT license. You are free to use, modify and distribute this software.
+You can find the details on the [Migration guide](./pages/migrate-v2.x-v3.x.md)

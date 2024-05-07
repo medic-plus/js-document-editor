@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>jEditor Themes Example</title>
+    <link type="text/css" rel="stylesheet"
+        href="https://unpkg.com/@medicplus/js-document-editor@latest/dist/jeditor.css" />
+    <link type="text/css" rel="stylesheet" href="./custom.css" />
+</head>
+
+<body>
+    <div id="jEditor"></div>
+    <script src="https://unpkg.com/@medicplus/js-document-editor@latest/dist/jeditor.js" type="module"></script>
+    <script type="module">
+        import { data } from "../defaults/data.js";
+        import { elements } from "../defaults/elements.js";
+        import { customActions } from "./custom-actions.js";
+
+        const editor = new jEditor(
+            {
+                container: "#jEditor",
+                elements: elements,
+                title: `<a href='https://github.com/medic-plus/js-document-editor'>jEditor Themes</a>`,
+                units: "cm",
+                zoomThreshold: 0.2,
+                paperSize: "half-letter",
+                orientation: "landscape",
+                customToolbarActions: customActions,
+                customToolbarClassName: "grid grid-cols-4",
+                theme: "first",
+            },
+            data
+        );
+        window.editor = editor;
+    </script>
+</body>
+
+</html>

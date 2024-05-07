@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>jEditor Localized Example</title>
+    <link type="text/css" rel="stylesheet"
+        href="https://unpkg.com/@medicplus/js-document-editor@latest/dist/jeditor.css" />
+</head>
+
+<body>
+    <div id="jEditor"></div>
+    <script src="https://unpkg.com/@medicplus/js-document-editor@latest/dist/jeditor.js" type="module"></script>
+    <script type="module">
+        import { data } from "./data.js";
+        import { en_EN } from "./elements/en_EN.js";
+        import { defaultElements } from "./elements/default.js";
+        import { customActions } from "./custom-actions.js";
+
+        const elements = defaultElements.map((element, index) => ({ ...element, ...en_EN[index] }));
+        const editor = new jEditor(
+            {
+                container: "#jEditor",
+                elements: elements,
+                title: `<a href='https://github.com/medic-plus/js-document-editor'>Localized jEditor</a>`,
+                units: "cm",
+                zoomThreshold: 0.2,
+                paperSize: "letter",
+                sidebarPosition: "right",
+                customToolbarActions: customActions,
+            },
+            data
+        );
+        window.editor = editor;
+    </script>
+</body>
+
+</html>
