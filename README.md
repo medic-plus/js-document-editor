@@ -81,7 +81,7 @@ A full redesign of the UI has been implemented on this new version, and a full r
 
 ## Migrating from v2.x
 
-You can find the details on the [Migration guide](https://medic-plus.github.io/js-document-editor/migrate-v2.x-v3.x.html)
+You can find the details on the [Migration guide](https://medic-plus.github.io/js-document-editor/pages/migrate-v2.x-v3.x.html)
 
 ## License
 

@@ -324,6 +324,7 @@ export default class SideBar
         this.getEditor().renderElements();
         this.getEditor().selectElement(element.key);
         this.triggerChange("align", element.key);
+        this.showDetails(element.key);
       };
       button.append(
         this.createTooltipElement(this.getLocalizedText(align.localeText))
