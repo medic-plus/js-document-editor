@@ -1,7 +1,7 @@
-@import "themes/themes.scss";
-@import "tailwindcss/base";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
+@use "themes/themes.scss";
+@use "tailwindcss/base";
+@use "tailwindcss/components";
+@use "tailwindcss/utilities";
 
 @layer components {
   ::-webkit-scrollbar {

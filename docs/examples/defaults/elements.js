@@ -40,7 +40,7 @@ export const elements = [
     key: "logo",
     text: "Logo",
     value:
-      "<img src='https://via.placeholder.com/150' style='width: 100%;height: 100%;'>",
+      "<img src='https://placehold.co/150' style='width: 100%;height: 100%;'>",
     width: 125,
     height: 125,
     settings: { align: false, fontSize: false, placeholder: false },
