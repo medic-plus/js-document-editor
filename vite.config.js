@@ -48,12 +48,6 @@ export default defineConfig({
           tsconfig: "./tsconfig.json",
         }),
       ],
-      output: {
-        assetFileNames: (assetInfo) => {
-          if (assetInfo.name == "style.css") return "jeditor.css";
-          return assetInfo.name;
-        },
-      },
     },
   },
 });
