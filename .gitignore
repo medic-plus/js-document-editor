@@ -1,5 +1,6 @@
 .vscode
 dist
 docs/_site
+docs/vendor
 node_modules
 .pnpm-store/*
