@@ -2,3 +2,4 @@
 dist
 docs/_site
 node_modules
+.pnpm-store/*

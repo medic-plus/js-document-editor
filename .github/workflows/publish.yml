@@ -13,11 +13,11 @@ jobs:
         with:
           node-version: "24.x"
           registry-url: "https://registry.npmjs.org"
-      - name: Install Yarn
-        run: npm install -g yarn
+      - name: Setup pnpm
+        run: corepack enable && corepack prepare pnpm@latest --activate
       - name: Install dependencies and build 🔧
-        run: yarn install --frozen-lockfile && yarn build
-      - name: Publish package on NPM 📦
+        run: pnpm install --frozen-lockfile && pnpm build
+      - name: Publish package on NPM Registry 📦
         run: |
           TAG=$(echo $GITHUB_REF_NAME | grep -oP '^v\d+\.\d+\.\d+-?\K(\w+)?')
           npm publish --tag ${TAG:-latest}
