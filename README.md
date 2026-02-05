@@ -24,13 +24,7 @@ The easiest way to get started is to use the Unpkg CDN in your website:
 ></script>
 ```
 
-Using yarn:
-
-```bash
-yarn add @medicplus/js-document-editor
-```
-
-Using npm:
+Using `npm`:
 
 ```bash
 npm install @medicplus/js-document-editor --save
@@ -76,7 +70,7 @@ A full redesign of the UI has been implemented on this new version, and a full r
 - Library code reimplemented with TypeScript to improve on type error checking
 - UI redesigned with Tailwind instead of plain CSS code
 - FontAwesome icons now included with the library
-- Moved from using NPM to Yarn
+- Moved from using NPM to PNPM
 - Migrated to Vite instead of Webpack (dropper support for old browsers)
 
 ## Migrating from v2.x
