@@ -1,6 +1,6 @@
 {
   "name": "@medicplus/js-document-editor",
-  "version": "3.2.3",
+  "version": "3.2.4",
   "description": "A simple and extensible JavaScript document editor",
   "main": "dist/jeditor.js",
   "type": "module",
@@ -19,10 +19,10 @@
   },
   "homepage": "https://github.com/medic-plus/js-document-editor#readme",
   "devDependencies": {
-    "@fortawesome/fontawesome-svg-core": "^7.1.0",
-    "@fortawesome/free-solid-svg-icons": "^7.1.0",
+    "@fortawesome/fontawesome-svg-core": "^7.2.0",
+    "@fortawesome/free-solid-svg-icons": "^7.2.0",
     "@rollup/plugin-typescript": "^12.3.0",
-    "@types/node": "^24.10.10",
+    "@types/node": "^24.10.13",
     "autoprefixer": "^10.4.24",
     "interactjs": "^1.10.27",
     "postcss": "^8.5.6",
