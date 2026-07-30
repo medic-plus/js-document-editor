@@ -1,5 +1,5 @@
-onlyBuiltDependencies:
-  - '@parcel/watcher'
-  - esbuild
-overrides:
-  rollup@>=4.0.0 <4.59.0: '>=4.59.0'
+minimumReleaseAge: 4320
+
+allowBuilds:
+  '@parcel/watcher': false
+  esbuild: true

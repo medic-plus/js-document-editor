@@ -1,7 +1,5 @@
 import { defineConfig } from "vite";
 import { resolve } from "path";
-import typescript from "@rollup/plugin-typescript";
-import { typescriptPaths } from "rollup-plugin-typescript-paths";
 import { viteStaticCopy } from "vite-plugin-static-copy";
 
 export default defineConfig({
@@ -37,17 +35,7 @@ export default defineConfig({
     target: "esnext",
     rollupOptions: {
       external: [],
-      plugins: [
-        typescriptPaths({
-          preserveExtensions: true,
-        }),
-        typescript({
-          sourceMap: false,
-          declaration: false,
-          outDir: "dist",
-          tsconfig: "./tsconfig.json",
-        }),
-      ],
+      plugins: [],
     },
   },
 });
